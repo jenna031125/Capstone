@@ -1,0 +1,105 @@
+title: Start
+---
+
+Rain taps softly against the window.
+A cramped studio apartment. Bills scattered across a small table. The room is dim except for the light of a phone screen.
+The Player stares at the screen. 
+<<play_animation Player Black>>
+
+Player: …Rent… electricity… overdue notice?
+
+The Player exhales.
+
+Player: I can’t keep stretching it like this.
+
+Her stomach growls. 
+
+Player: …I really need a job. Anything at this point.
+
+She goes to job search site and scrolls through job listings.
+
+Part-time Café Staff – Experience required
+Convenience Store Night Shift – Minimum wage
+Warehouse Sorting – Heavy lifting required
+
+Player: Minimum wage… heavy lifting… I won’t survive on that.
+
+She scrolls further down.
+The scrolling slows.
+
+Private Residence | High Pay – Paid Immediately After Completion, No Experience Required
+
+Player: ... One week?
+
+She taps the listing.
+
+- Clean designated areas only
+- Do not enter restricted rooms
+- Follow all instructions strictly
+- Live-out position
+- Generous compensation
+A phone number is listed below. No company name. No address.
+
+Player: ... Private residence?
+
+She frowns.
+
+Player: No company name… no photos… no reviews…
+
+She scrolls. Nothing more.
+
+Player: That's suspicious. But...
+
+She breathes in.
+
+Player: The pay. 
+
+She rereads the number.
+
+Player: That’s more than I’d make in a month.
+
+The rain outside grows slightly louder.
+
+What should I do?
+
+-> Ignore it.
+    Player: It’s probably some scam.
+    Player: ... Or even worse. 
+    A small pause.
+    Player: ... But what if it isn't?
+    She glances back at the unpaid bills.
+    Player: I just need one week.
+    <<jump PhoneCall>>
+-> Call now.
+    <<jump PhoneCall>>
+
+===
+title: PhoneCall
+---
+<<play_animation Player Grey>>
+
+The phone rings once. 
+Twice.
+
+Click.
+
+Land Lady: Hello?
+
+Her voice is steady. Almost too steady.
+
+Player: Ah, he- hello. I'm calling you about the cleaning job...
+
+A brief pause.
+
+Land Lady: A-ha. You saw the listing. 
+
+Player: Yes... 
+
+(Story ongoing)
+
+Let's move down to go to the workplace. 
+
+<<change_clothes Player Maid>>
+
+
+===
