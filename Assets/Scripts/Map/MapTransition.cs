@@ -23,18 +23,20 @@ public class MapTransition : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            confiner.m_BoundingShape2D = mapBoundary;
-            UpdatePlayerPosition(collision.gameObject);
+            FadeTransition(collision.gameObject);
         }
 
-        Debug.Log("Something entered");
 
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Player entered trigger");
-            confiner.m_BoundingShape2D = mapBoundary;
-        }
+    }
 
+    async void FadeTransition(GameObject player)
+    {
+        await ScreenFader.instance.FadeOut();
+        
+        confiner.m_BoundingShape2D = mapBoundary;
+        UpdatePlayerPosition(player);
+
+        await ScreenFader.instance.FadeIn();
     }
 
     private void UpdatePlayerPosition(GameObject player)
