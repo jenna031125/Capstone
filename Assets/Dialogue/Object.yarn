@@ -1,0 +1,33 @@
+﻿title: Diary
+---
+An old diary with empty pages.
+Should I write something?
+->Yes
+->No
+===
+title: Blocked_Door
+---
+The door is blocked with wood planks.
+
+->Open
+    <<if $has_crowbar == true>>
+        I can try with my crowbar... 
+        (Sound of wood splintering!)
+        The planks are gone. The path is clear.
+        <<set $door_opened = true>>
+    <<else>>
+        I can't open that with my bare hands, I might need a tool.
+    <<endif>>
+    Player: I can't open this with my bare hands.
+    Player: I might need to look for a tool...
+->Ignore
+    Player: It should be blocked for a reason...
+
+===
+title: Cupboard
+---
+You look inside the dusty cupboard.
+Among the old plates, you see something heavy...
+Player: I found a crowbar!
+<<set $has_crowbar = true>>
+===
