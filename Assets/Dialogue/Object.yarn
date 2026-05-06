@@ -31,3 +31,16 @@ Among the old plates, you see something heavy...
 Player: I found a crowbar!
 <<set $has_crowbar = true>>
 ===
+title: Book_Shelf
+---
+Old books covered with dust. 
+Seems like no one had been using it for a long time...
+Player: Uh... maybe let's not touch it. 
+===
+title: BR_Window
+---
+Player: Ew, spider web... Why is it so foggy?
+Player: I can't even look outside properly...
+Player: ... Hmm?
+Player: There's no handle attatched to this. I can't open the window...
+===
