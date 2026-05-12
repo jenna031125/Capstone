@@ -31,3 +31,55 @@ Among the old plates, you see something heavy...
 Player: I found a crowbar!
 <<set $has_crowbar = true>>
 ===
+title: Dining_Cutlery
+---
+There are set of cutleries...
+->Take it
+Player: It's dusty, but I'll might use this somewhere.
+<<set $has_cutlery = true>>
+->Leave it
+===
+title: Dining_Drawing
+---
+There is an old drawing of a man in Victorian-era clothing with black hair.
+Player: It's too foggy, I can't see it well... 
+===
+title: Dining_Table
+---
+The dust on the table doesn't wipe off even when touched.
+Player: How many years does it take for dust to harden like stone like this...?
+===
+title: Dining_Carpet
+---
+Player: Hmm? This is...
+Player: ...
+Player: ......
+Player: ......!!!
+Player: Blood stain?!
+Player: ...... Oh.
+Player: It's just a wine stain.
+===
+title: Dining_CleanSeat
+---
+Player: What a dusty table...
+Player: Huh? 
+Player: This spot is clean for some reason...
+Player: It seems like someone had been using this seat until recently.
+===
+title: Cutting_Board
+---
+This is where the chef was slicing meat just moments ago.
+Player: Is it beef for dinner tonight? Yum!
+===
+title: Cooking_Knife
+---
+It's a very sharp knife.
+Player: Should I take it?
+->Take it
+Player: This looks perfect to protect myself from danger...
+Chef: Hey! Hands off there!
+Player: S-Sorry, sir!
+I hurriedly put it down. I got scolded and didn't even get the knife...
+->Leave it
+Well, I don't want to make any problems. 
+===
