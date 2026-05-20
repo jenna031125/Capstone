@@ -1,8 +1,16 @@
 ﻿title: Butler_Talk
 ---
-Butler: Welcome.
-Butler: Good to see you here.
-
+<<if $day_count == 1>>
+    <<if $is_after_shift == false>>
+        Butler: Good morning. Please start your cleaning in the West Wing.
+    <<else>>
+        Butler: You look tired. The East Wing still needs dusting tomorrow.
+    <<endif>>
+<<elseif $day_count == 2>>
+    Butler: Ah, Day 2. You're getting faster at this.
+<<elseif $day_count == 3>>
+    Butler: It is your final day. Please ensure the mansion is spotless.
+<<endif>>
 ===
 title: Chef_Talk
 ---

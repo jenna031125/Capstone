@@ -100,4 +100,6 @@ Player: Yes...
 Let's move down to go to the workplace. 
 
 <<change_clothes Player Maid>>
+<<set $day_count = 1>>
+<<set $is_after_shift = false>>
 ===

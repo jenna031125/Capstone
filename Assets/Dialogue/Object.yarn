@@ -34,9 +34,10 @@ Player: I found a crowbar!
 title: Dining_Cutlery
 ---
 There are set of cutleries...
+
 ->Take it
-Player: It's dusty, but I'll might use this somewhere.
-<<set $has_cutlery = true>>
+    Player: It's dusty, but I'll might use this somewhere.
+    <<set $has_cutlery = true>>
 ->Leave it
 ===
 title: Dining_Drawing
@@ -75,11 +76,28 @@ title: Cooking_Knife
 ---
 It's a very sharp knife.
 Player: Should I take it?
+
 ->Take it
-Player: This looks perfect to protect myself from danger...
-Chef: Hey! Hands off there!
-Player: S-Sorry, sir!
-I hurriedly put it down. I got scolded and didn't even get the knife...
+    Player: This looks perfect to protect myself from danger...
+    Chef: Hey! Hands off there!
+    Player: S-Sorry, sir!
+    I hurriedly put it down. I got scolded and didn't even get the knife...
 ->Leave it
-Well, I don't want to make any problems. 
+    Well, I don't want to make any problems. 
+===
+title: Go_To_Sleep
+---
+Should I go to sleep?
+-> Yes
+    <<if $day_count < 3>>
+        (You lay down and fall into a deep sleep...)
+        <<set $day_count += 1>>
+        <<set $is_after_shift = false>>
+        Next day: Day {$day_count}.
+    <<else>>
+        (The three days are up. You've completed your time at the mansion...)
+        The story concludes here.
+    <<endif>>
+-> No
+    (You decide to stay up a bit longer.)
 ===
