@@ -1,6 +1,6 @@
 using UnityEngine;
-using TMPro; // Needed for TextMeshPro
-using Yarn.Unity; // Needed to talk to Yarn Spinner
+using TMPro;
+using Yarn.Unity;
 
 public class DayUIHandler : MonoBehaviour
 {
@@ -10,8 +10,6 @@ public class DayUIHandler : MonoBehaviour
     void Awake()
     {
         _textMeshPro = GetComponent<TextMeshProUGUI>();
-
-        // Find Yarn Spinner's variable brain in your scene
         _variableStorage = FindFirstObjectByType<InMemoryVariableStorage>();
     }
 
@@ -19,16 +17,16 @@ public class DayUIHandler : MonoBehaviour
     {
         if (_variableStorage != null && _textMeshPro != null)
         {
-            // 1. Try to read the $day_count variable from Yarn Spinner
-            // If it doesn't exist yet, it defaults to 1
+            // Default fallback if Yarn hasn't processed the variable yet
             float currentDay = 1;
 
+            // Safely ask Yarn's dictionary for the value of $day_count
             if (_variableStorage.TryGetValue("$day_count", out float yarnDay))
             {
                 currentDay = yarnDay;
             }
 
-            // 2. Update the text on your screen
+            // Push the result directly to your TextMeshPro component
             _textMeshPro.text = "Day " + currentDay;
         }
     }

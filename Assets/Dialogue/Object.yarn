@@ -5,6 +5,19 @@ Should I write something?
 ->Yes
 ->No
 ===
+title: Book_Shelf
+---
+Old books covered with dust. 
+Seems like no one had been using it for a long time...
+Player: Uh... maybe let's not touch it. 
+===
+title: BR_Window
+---
+Player: Ew, spider web... Why is it so foggy?
+Player: I can't even look outside properly...
+Player: ... Hmm?
+Player: There's no handle attatched to this. I can't open the window...
+===
 title: Blocked_Door
 ---
 The door is blocked with wood planks.
