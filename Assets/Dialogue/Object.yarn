@@ -102,15 +102,34 @@ title: Go_To_Sleep
 ---
 Should I go to sleep?
 -> Yes
-    <<if $day_count < 3>>
-        (You lay down and fall into a deep sleep...)
-        <<set $day_count += 1>>
-        <<set $is_after_shift = false>>
-        Next day: Day {$day_count}.
+    <<if $is_after_shift == true>>
+        <<if $day_count < 3>>
+            (You lay down and fall into a deep sleep...)
+            <<set $day_count += 1>>
+            <<set $is_after_shift = false>>
+            Next day: Day {$day_count}.
+        <<else>>
+            (The three days are up. You've completed your time at the mansion...)
+            The story concludes here.
+        <<endif>>
     <<else>>
-        (The three days are up. You've completed your time at the mansion...)
-        The story concludes here.
+        Player: I can't sleep yet! I need to finish my work shift in the office first.
     <<endif>>
 -> No
     (You decide to stay up a bit longer.)
+===
+title: Office_Desk
+---
+<<if $is_after_shift == false>>
+    Player: Should I start working?
+    -> Yes
+        Player: ......
+        (Sounds of typing and organizing paperwork...)
+        Player: My work is finished!
+        <<set $is_after_shift = true>>
+    -> No
+        Player: I'll finish this up later.
+<<else>>
+    Player: I've already finished my shift for today. I should look around or head to bed.
+<<endif>>
 ===
