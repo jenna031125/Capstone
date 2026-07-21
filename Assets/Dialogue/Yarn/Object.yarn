@@ -133,3 +133,17 @@ title: Office_Desk
     Player: I've already finished my shift for today. I should look around or head to bed.
 <<endif>>
 ===
+title: Flower_Pot
+---
+<<if $is_after_shift == false>>
+    Player: Should I water this flower for my work shift?
+    -> Yes
+        <<start_watering_minigame>>
+        // Wait until player finishes minigame, then complete shift
+        <<set $is_after_shift = true>>
+    -> No
+        Player: I'll do it later.
+<<else>>
+    Player: The flower looks healthy and watered now!
+<<endif>>
+===
