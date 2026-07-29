@@ -5,6 +5,7 @@ public class YarnInteractable : MonoBehaviour, IInteractable
 {
     // Type the name of the node from your .yarn file here in the Inspector
     [SerializeField] private string startNode;
+    bool dialogueFinished;
 
     private DialogueRunner dialogueRunner;
 
@@ -22,10 +23,19 @@ public class YarnInteractable : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        if (dialogueFinished == true)
+            return;
+
         // If dialogue isn't running, start the assigned node
         if (!dialogueRunner.IsDialogueRunning)
         {
+            dialogueRunner.onDialogueComplete.AddListener(DialogueComplete);
             dialogueRunner.StartDialogue(startNode);
         }
+    }
+
+    public void DialogueComplete()
+    {
+        dialogueFinished = true;
     }
 }
