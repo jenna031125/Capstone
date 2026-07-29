@@ -147,3 +147,27 @@ title: Flower_Pot
     Player: The flower looks healthy and watered now!
 <<endif>>
 ===
+title: Fireplace
+---
+<<if $is_after_shift == false>>
+    Player: The fireplace is cold. I should prepare some firewood.
+    -> Light Fire
+        <<start_fireplace_minigame>>
+        <<set $is_after_shift = true>>
+    -> Leave it
+<<else>>
+    Player: The fire is burning nicely now.
+<<endif>>
+===
+title: Office_Frame
+---
+<<if $is_after_shift == false>>
+    Player: This old painting is covered in thick dust.
+    -> Clean Painting
+        <<start_dusting_minigame>>
+        <<set $is_after_shift = true>>
+    -> Leave it
+<<else>>
+    Player: The portrait looks much cleaner now.
+<<endif>>
+===

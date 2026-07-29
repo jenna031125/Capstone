@@ -1,16 +1,25 @@
 fileFormatVersion: 2
-guid: 836889a90d861304bb75373720022945
+guid: b1c6e7e22d71af940940c83914e9a4fe
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3804412542242936574
-    second: PotsHealthyFlower_0
+      213: 6496534569508074968
+    second: FrameDust_0
   - first:
-      213: 8957637394570769536
-    second: PotsHealthyFlower_1
+      213: 1370933852412079069
+    second: FrameDust_1
   - first:
-      213: 4734572718997583625
-    second: PotsHealthyFlower_2
+      213: 718655013156462067
+    second: FrameDust_2
+  - first:
+      213: 2713346119325942132
+    second: FrameDust_3
+  - first:
+      213: -846452584086918926
+    second: FrameDust_4
+  - first:
+      213: -1053750684192581793
+    second: FrameDust_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +67,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 987, y: 165, z: 636, w: 200}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -106,23 +115,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PotsHealthyFlower_2
+      name: FrameDust_1
       rect:
         serializedVersion: 2
-        x: 994
-        y: 168
-        width: 672
-        height: 1045
+        x: 863
+        y: 324
+        width: 709
+        height: 846
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 3, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9073b179dc494b140800000000000000
-      internalID: 4734572718997583625
+      spriteID: ddb64934319860310800000000000000
+      internalID: 1370933852412079069
       vertices: []
       indices: 
       edges: []
@@ -131,8 +140,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 1973c441047bdac44ae3cb9337069916
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -141,9 +150,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PotsHealthyFlower_0: -3804412542242936574
-      PotsHealthyFlower_1: 8957637394570769536
-      PotsHealthyFlower_2: 4734572718997583625
+      FrameDust_0: 6496534569508074968
+      FrameDust_1: 1370933852412079069
+      FrameDust_2: 718655013156462067
+      FrameDust_3: 2713346119325942132
+      FrameDust_4: -846452584086918926
+      FrameDust_5: -1053750684192581793
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

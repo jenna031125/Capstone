@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 836889a90d861304bb75373720022945
+guid: 7da3b0a4c954b3643a2495b0897134a5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3804412542242936574
-    second: PotsHealthyFlower_0
-  - first:
-      213: 8957637394570769536
-    second: PotsHealthyFlower_1
-  - first:
-      213: 4734572718997583625
-    second: PotsHealthyFlower_2
+      213: 2613445220777051122
+    second: WoodSprite1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +52,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 987, y: 165, z: 636, w: 200}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -106,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PotsHealthyFlower_2
+      name: WoodSprite1_0
       rect:
         serializedVersion: 2
-        x: 994
-        y: 168
-        width: 672
-        height: 1045
+        x: 1999
+        y: 180
+        width: 161
+        height: 320
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9073b179dc494b140800000000000000
-      internalID: 4734572718997583625
+      spriteID: 2f3cb58e492d44420800000000000000
+      internalID: 2613445220777051122
       vertices: []
       indices: 
       edges: []
@@ -131,8 +125,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -141,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PotsHealthyFlower_0: -3804412542242936574
-      PotsHealthyFlower_1: 8957637394570769536
-      PotsHealthyFlower_2: 4734572718997583625
+      WoodSprite1_0: 2613445220777051122
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

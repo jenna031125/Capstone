@@ -1,3 +1,4 @@
+using System.Collections; // Needed for Coroutines
 using UnityEngine;
 using UnityEngine.UI;
 using Yarn.Unity;
@@ -12,6 +13,7 @@ public class FlowerPotMinigame : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private float _waterTimeRequired = 3.0f; // Seconds needed to water
+    [SerializeField] private float _delayBeforeClose = 2.0f;  // Seconds to display healthy flower before closing
 
     private float _currentWaterTimer = 0f;
     private bool _isComplete = false;
@@ -48,7 +50,7 @@ public class FlowerPotMinigame : MonoBehaviour
         {
             _currentWaterTimer += Time.deltaTime;
 
-            // Optional: Move watering can to follow mouse while holding
+            // Move watering can to follow mouse while holding
             if (_wateringCanImage != null)
             {
                 _wateringCanImage.transform.position = Input.mousePosition;
@@ -67,16 +69,22 @@ public class FlowerPotMinigame : MonoBehaviour
         _isComplete = true;
         _isHolding = false;
 
-        // Swap to healthy flower sprite
+        // 1. Swap to healthy flower sprite immediately
         if (_flowerPotImage != null && _healthyPotSprite != null)
         {
             _flowerPotImage.sprite = _healthyPotSprite;
         }
 
-        Debug.Log("Minigame Complete! Flower is healthy.");
+        // 2. Start waiting before closing
+        StartCoroutine(WaitAndCloseRoutine());
+    }
 
-        // Automatically close after 1 second delay so player sees the fresh flower
-        Invoke(nameof(CloseMinigame), 1.0f);
+    private IEnumerator WaitAndCloseRoutine()
+    {
+        // Pause execution for the set duration so the player can see the healthy flower
+        yield return new WaitForSeconds(_delayBeforeClose);
+
+        CloseMinigame();
     }
 
     public void CloseMinigame()
