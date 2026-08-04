@@ -165,3 +165,15 @@ title: Office_Desk
     Player: The desk is neat and organized now.
 <<endif>>
 ===
+title: Floor_Interaction
+---
+<<if $is_after_shift == false>>
+    Player: The floor is covered in dust patches.
+    -> Sweep floor
+        <<start_floor_minigame>>
+        <<set $is_after_shift = true>>
+    -> Leave it
+<<else>>
+    Player: The floor is swept clean now.
+<<endif>>
+===

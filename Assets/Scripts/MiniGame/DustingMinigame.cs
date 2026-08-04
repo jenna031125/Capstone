@@ -1,14 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Yarn.Unity;
 
-public class DustingMinigame : MonoBehaviour
+public class DustingMinigame : MonoBehaviour, IPointerClickHandler
 {
     [Header("UI References")]
     [SerializeField] private Image _dustImage;
     [SerializeField] private Image _dusterCursorImage;
-    [SerializeField] private Button _frameClickButton;
 
     [Header("Sprites")]
     [SerializeField] private Sprite _dusterIdleSprite;
@@ -16,7 +16,7 @@ public class DustingMinigame : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private int _clicksRequired = 10;
-    [SerializeField] private float _clickAnimDuration = 0.15f; // How long the clicked sprite stays
+    [SerializeField] private float _clickAnimDuration = 0.15f;
     [SerializeField] private float _delayBeforeClose = 1.5f;
 
     private int _currentClicks = 0;
@@ -27,7 +27,7 @@ public class DustingMinigame : MonoBehaviour
         _currentClicks = 0;
         _isComplete = false;
 
-        // Reset Dust Transparency to 100% full opacity
+        // Reset dust opacity to 100%
         if (_dustImage != null)
         {
             Color c = _dustImage.color;
@@ -36,45 +36,36 @@ public class DustingMinigame : MonoBehaviour
             _dustImage.gameObject.SetActive(true);
         }
 
-        // Set up cursor sprite
+        // Setup custom duster cursor
         if (_dusterCursorImage != null && _dusterIdleSprite != null)
         {
             _dusterCursorImage.sprite = _dusterIdleSprite;
             _dusterCursorImage.gameObject.SetActive(true);
-            Cursor.visible = false; // Hide system hardware cursor while dusting
-        }
-
-        // Hook up button click listener
-        if (_frameClickButton != null)
-        {
-            _frameClickButton.interactable = true;
-            _frameClickButton.onClick.RemoveAllListeners();
-            _frameClickButton.onClick.AddListener(OnFrameClicked);
+            Cursor.visible = false;
         }
     }
 
     void OnDisable()
     {
-        // Restore standard hardware cursor when minigame closes
         Cursor.visible = true;
     }
 
     void Update()
     {
-        // Smoothly stick the custom duster sprite to mouse cursor position
         if (_dusterCursorImage != null && !_isComplete)
         {
             _dusterCursorImage.transform.position = Input.mousePosition;
         }
     }
 
-    private void OnFrameClicked()
+    // Listens for mouse clicks anywhere on this Canvas/Image
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (_isComplete) return;
 
         _currentClicks++;
 
-        // 1. Calculate and lower dust opacity linearly
+        // Lower dust opacity per click
         if (_dustImage != null)
         {
             float alpha = 1f - ((float)_currentClicks / _clicksRequired);
@@ -83,11 +74,11 @@ public class DustingMinigame : MonoBehaviour
             _dustImage.color = c;
         }
 
-        // 2. Play 1-frame click animation on the duster
+        // Play 1-frame click animation
         StopAllCoroutines();
         StartCoroutine(DusterClickAnimationRoutine());
 
-        // 3. Check for completion
+        // Check completion
         if (_currentClicks >= _clicksRequired)
         {
             CompleteMinigame();
@@ -107,15 +98,7 @@ public class DustingMinigame : MonoBehaviour
     private void CompleteMinigame()
     {
         _isComplete = true;
-
-        if (_frameClickButton != null)
-        {
-            _frameClickButton.interactable = false;
-        }
-
-        // Keep cursor visible again once completed
         Cursor.visible = true;
-
         StartCoroutine(WaitAndCloseRoutine());
     }
 
