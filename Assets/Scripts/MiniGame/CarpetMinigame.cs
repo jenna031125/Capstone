@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Yarn.Unity;
+using CsvHelper.Configuration.Attributes;
 
 public class CarpetMinigame : MonoBehaviour, IPointerClickHandler
 {
@@ -22,6 +23,10 @@ public class CarpetMinigame : MonoBehaviour, IPointerClickHandler
     private bool _isFlipped = false;
     private bool _allMessCleared = false;
     private bool _isComplete = false;
+
+    [Header("World Object")]
+    public SpriteRenderer obj;
+    public Sprite completedSprite;
 
     void OnEnable()
     {
@@ -105,6 +110,7 @@ public class CarpetMinigame : MonoBehaviour, IPointerClickHandler
     private void CompleteMinigame()
     {
         _isComplete = true;
+        obj.sprite = completedSprite;
         StartCoroutine(WaitAndCloseRoutine());
     }
 

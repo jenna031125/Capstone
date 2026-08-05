@@ -117,7 +117,6 @@ Player: Should I take it?
 ===
 title: Go_To_Sleep
 ---
-// Check if all 3 tasks for the CURRENT day are complete
 <<if $day_count == 1 and $is_floor_left_clean and $is_pot_watered and $is_desk_cleaned_day1>>
     <<set $can_sleep = true>>
 <<elseif $day_count == 2 and $is_carpet_cleaned and $is_fireplace_cleaned_day2 and $is_frame_cleaned>>
@@ -128,7 +127,6 @@ title: Go_To_Sleep
     <<set $can_sleep = false>>
 <<endif>>
 
-// Sleep Choice Logic
 <<if $can_sleep == false>>
     Player: I can't go to sleep yet! I haven't finished all my cleaning tasks for today.
 <<else>>
@@ -154,6 +152,7 @@ title: Flower_Pot
         -> Yes
             <<start_watering_minigame>>
             <<set $is_pot_watered = true>>
+            <<jump Check_Daily_Progress>>
         -> No
             Player: I'll do it later.
     <<else>>
@@ -171,6 +170,7 @@ title: Fireplace
         -> Light Fire
             <<start_fireplace_minigame>>
             <<set $is_fireplace_cleaned_day2 = true>>
+            <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
         Player: The fire is burning nicely now.
@@ -182,6 +182,7 @@ title: Fireplace
         -> Light Fire
             <<start_fireplace_minigame>>
             <<set $is_fireplace_cleaned_day3 = true>>
+            <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
         Player: The fire is burning nicely now.
@@ -199,6 +200,7 @@ title: Office_Frame
         -> Clean Painting
             <<start_dusting_minigame>>
             <<set $is_frame_cleaned = true>>
+            <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
         Player: The portrait looks much cleaner now.
@@ -215,6 +217,7 @@ title: Office_Desk
         -> Tidy up desk
             <<start_desk_minigame>>
             <<set $is_desk_cleaned_day1 = true>>
+            <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
         Player: The desk is neat and organised now.
@@ -226,6 +229,7 @@ title: Office_Desk
         -> Tidy up desk
             <<start_desk_minigame>>
             <<set $is_desk_cleaned_day3 = true>>
+            <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
         Player: The desk is neat and organised now.
@@ -243,6 +247,7 @@ title: Floor_Sweep_Right
         -> Sweep floor
             <<start_floor_minigame_right>>
             <<set $is_floor_right_clean = true>>
+            <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
         Player: This spot is already clean.
@@ -259,6 +264,7 @@ title: Floor_Sweep_Left
         -> Sweep floor
             <<start_floor_minigame_left>>
             <<set $is_floor_left_clean = true>>
+            <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
         Player: This spot is already clean.
@@ -275,11 +281,24 @@ title: Carpet_Interaction
         -> Flip open carpet
             <<start_carpet_minigame>>
             <<set $is_carpet_cleaned = true>>
+            <<jump Check_Daily_Progress>>
         -> Leave it alone
     <<else>>
         Player: The carpet is clean and neat now. No secret mess hiding underneath!
     <<endif>>
 <<else>>
     Player: I don't have to clean this!
+<<endif>>
+===
+title: Check_Daily_Progress
+---
+<<if $day_count == 1 and $is_floor_left_clean and $is_pot_watered and $is_desk_cleaned_day1>>
+    Player: All job is done for today! 
+
+<<elseif $day_count == 2 and $is_carpet_cleaned and $is_fireplace_cleaned_day2 and $is_frame_cleaned>>
+    Player: All job is done for today! 
+
+<<elseif $day_count == 3 and $is_desk_cleaned_day3 and $is_floor_right_clean and $is_fireplace_cleaned_day3>>
+    Player: All job is done for today! 
 <<endif>>
 ===
