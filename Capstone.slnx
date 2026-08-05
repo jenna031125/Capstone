@@ -1,0 +1,9 @@
+﻿<Solution>
+  <Project Path="YarnSpinner.Unity.csproj" />
+  <Project Path="YarnSpinner.Unity.Editor.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="YarnSpinnerTests.CommandsInAnAssemblyDefinition.csproj" />
+  <Project Path="YarnSpinner.Unity.Tests.Editor.csproj" />
+  <Project Path="YarnSpinner.Unity.Tests.csproj" />
+  <Project Path="YarnSpinner.Unity.Tests.Shared.csproj" />
+</Solution>

@@ -7,6 +7,7 @@ public class DeskTidyingMinigame : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private int _totalPapersCount = 8;
     [SerializeField] private float _delayBeforeClose = 1.5f;
+    bool dialogueFinished;
 
     private int _stackedCount = 0;
     public int StackedCount => _stackedCount;
@@ -48,5 +49,9 @@ public class DeskTidyingMinigame : MonoBehaviour
         {
             minigame.gameObject.SetActive(true);
         }
+    }
+    public void DialogueComplete()
+    {
+        dialogueFinished = true;
     }
 }

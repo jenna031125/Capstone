@@ -94,14 +94,34 @@ public class FloorCleaningMinigame : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // --- YARN SPINNER COMMAND ---
-    [YarnCommand("start_floor_minigame")]
-    public static void StartFloorCommand()
+    // --- YARN SPINNER COMMANDS ---
+    [YarnCommand("start_floor_minigame_left")]
+    public static void StartFloorLeftCommand()
     {
-        FloorCleaningMinigame minigame = FindFirstObjectByType<FloorCleaningMinigame>(FindObjectsInactive.Include);
-        if (minigame != null)
+        // Finds the specific canvas assigned to the left spot
+        FloorCleaningMinigame[] games = FindObjectsByType<FloorCleaningMinigame>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (var game in games)
         {
-            minigame.gameObject.SetActive(true);
+            if (game.gameObject.name.Contains("Left"))
+            {
+                game.gameObject.SetActive(true);
+                break;
+            }
+        }
+    }
+
+    [YarnCommand("start_floor_minigame_right")]
+    public static void StartFloorRightCommand()
+    {
+        // Finds the specific canvas assigned to the right spot
+        FloorCleaningMinigame[] games = FindObjectsByType<FloorCleaningMinigame>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (var game in games)
+        {
+            if (game.gameObject.name.Contains("Right"))
+            {
+                game.gameObject.SetActive(true);
+                break;
+            }
         }
     }
 }

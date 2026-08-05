@@ -1,4 +1,21 @@
-﻿title: Diary
+﻿title: Start_Game
+---
+<<declare $day_count = 0>>
+
+// Completion tracking variables
+<<declare $day1_floor_done = false>>
+<<declare $day1_pot_done = false>>
+<<declare $day1_desk_done = false>>
+
+<<declare $day2_carpet_done = false>>
+<<declare $day2_fireplace_done = false>>
+<<declare $day2_picture_done = false>>
+
+<<declare $day3_desk_done = false>>
+<<declare $day3_floor_done = false>>
+<<declare $day3_fireplace_done = false>>
+===
+title: Diary
 ---
 An old diary with empty pages.
 Should I write something?
@@ -100,80 +117,169 @@ Player: Should I take it?
 ===
 title: Go_To_Sleep
 ---
-Should I go to sleep?
--> Yes
-    <<if $is_after_shift == true>>
+// Check if all 3 tasks for the CURRENT day are complete
+<<if $day_count == 1 and $is_floor_left_clean and $is_pot_watered and $is_desk_cleaned_day1>>
+    <<set $can_sleep = true>>
+<<elseif $day_count == 2 and $is_carpet_cleaned and $is_fireplace_cleaned_day2 and $is_frame_cleaned>>
+    <<set $can_sleep = true>>
+<<elseif $day_count == 3 and $is_desk_cleaned_day3 and $is_floor_right_clean and $is_fireplace_cleaned_day3>>
+    <<set $can_sleep = true>>
+<<else>>
+    <<set $can_sleep = false>>
+<<endif>>
+
+// Sleep Choice Logic
+<<if $can_sleep == false>>
+    Player: I can't go to sleep yet! I haven't finished all my cleaning tasks for today.
+<<else>>
+    Player: Should I go to sleep?
+    -> Yes
         <<if $day_count < 3>>
             (You lay down and fall into a deep sleep...)
             <<set $day_count += 1>>
-            <<set $is_after_shift = false>>
             Next day: Day {$day_count}.
         <<else>>
             (The three days are up. You've completed your time at the mansion...)
             The story concludes here.
         <<endif>>
-    <<else>>
-        Player: I can't sleep yet! I need to finish my work shift in the office first.
-    <<endif>>
--> No
-    (You decide to stay up a bit longer.)
+    -> No
+        (You decide to stay up a bit longer.)
+<<endif>>
 ===
 title: Flower_Pot
 ---
-<<if $is_after_shift == false>>
-    Player: Should I water this flower for my work shift?
-    -> Yes
-        <<start_watering_minigame>>
-        // Wait until player finishes minigame, then complete shift
-    -> No
-        Player: I'll do it later.
+<<if $day_count == 1>>
+    <<if $is_pot_watered == false>>
+        Player: Should I water this flower for my work shift?
+        -> Yes
+            <<start_watering_minigame>>
+            <<set $is_pot_watered = true>>
+        -> No
+            Player: I'll do it later.
+    <<else>>
+        Player: The flower looks healthy and watered now!
+    <<endif>>
 <<else>>
-    Player: The flower looks healthy and watered now!
+    Player: I don't have to clean this!
 <<endif>>
 ===
 title: Fireplace
 ---
-<<if $is_after_shift == false>>
-    Player: The fireplace is cold. I should prepare some firewood.
-    -> Light Fire
-        <<start_fireplace_minigame>>
-    -> Leave it
+<<if $day_count == 2>>
+    <<if $is_fireplace_cleaned_day2 == false>>
+        Player: The fireplace is cold. I should prepare some firewood.
+        -> Light Fire
+            <<start_fireplace_minigame>>
+            <<set $is_fireplace_cleaned_day2 = true>>
+        -> Leave it
+    <<else>>
+        Player: The fire is burning nicely now.
+    <<endif>>
+
+<<elseif $day_count == 3>>
+    <<if $is_fireplace_cleaned_day3 == false>>
+        Player: The fireplace is cold. I should prepare some firewood.
+        -> Light Fire
+            <<start_fireplace_minigame>>
+            <<set $is_fireplace_cleaned_day3 = true>>
+        -> Leave it
+    <<else>>
+        Player: The fire is burning nicely now.
+    <<endif>>
+
 <<else>>
-    Player: The fire is burning nicely now.
+    Player: I don't have to clean this!
 <<endif>>
 ===
 title: Office_Frame
 ---
-<<if $is_after_shift == false>>
-    Player: This old painting is covered in thick dust.
-    -> Clean Painting
-        <<start_dusting_minigame>>
-    -> Leave it
+<<if $day_count == 2>>
+    <<if $is_frame_cleaned == false>>
+        Player: This old painting is covered in thick dust.
+        -> Clean Painting
+            <<start_dusting_minigame>>
+            <<set $is_frame_cleaned = true>>
+        -> Leave it
+    <<else>>
+        Player: The portrait looks much cleaner now.
+    <<endif>>
 <<else>>
-    Player: The portrait looks much cleaner now.
+    Player: I don't have to clean this!
 <<endif>>
 ===
 title: Office_Desk
 ---
-<<if $is_after_shift == false>>
-    Player: There are papers and books scattered all over the desk.
-    -> Tidy up desk
-        <<start_desk_minigame>>
-        <<set $is_after_shift = true>>
-    -> Leave it
+<<if $day_count == 1>>
+    <<if $is_desk_cleaned_day1 == false>>
+        Player: There are papers and books scattered all over the desk.
+        -> Tidy up desk
+            <<start_desk_minigame>>
+            <<set $is_desk_cleaned_day1 = true>>
+        -> Leave it
+    <<else>>
+        Player: The desk is neat and organised now.
+    <<endif>>
+
+<<elseif $day_count == 3>>
+    <<if $is_desk_cleaned_day3 == false>>
+        Player: There are papers and books scattered all over the desk.
+        -> Tidy up desk
+            <<start_desk_minigame>>
+            <<set $is_desk_cleaned_day3 = true>>
+        -> Leave it
+    <<else>>
+        Player: The desk is neat and organised now.
+    <<endif>>
+
 <<else>>
-    Player: The desk is neat and organized now.
+    Player: I don't have to clean this!
 <<endif>>
 ===
-title: Floor_Interaction
+title: Floor_Sweep_Right
 ---
-<<if $is_after_shift == false>>
-    Player: The floor is covered in dust patches.
-    -> Sweep floor
-        <<start_floor_minigame>>
-        <<set $is_after_shift = true>>
-    -> Leave it
+<<if $day_count == 3>>
+    <<if $is_floor_right_clean == false>>
+        Player: There is dust gathered here too.
+        -> Sweep floor
+            <<start_floor_minigame_right>>
+            <<set $is_floor_right_clean = true>>
+        -> Leave it
+    <<else>>
+        Player: This spot is already clean.
+    <<endif>>
 <<else>>
-    Player: The floor is swept clean now.
+    Player: I don't have to clean this!
+<<endif>>
+===
+title: Floor_Sweep_Left
+---
+<<if $day_count == 1>>
+    <<if $is_floor_left_clean == false>>
+        Player: This spot needs sweeping.
+        -> Sweep floor
+            <<start_floor_minigame_left>>
+            <<set $is_floor_left_clean = true>>
+        -> Leave it
+    <<else>>
+        Player: This spot is already clean.
+    <<endif>>
+<<else>>
+    Player: I don't have to clean this!
+<<endif>>
+===
+title: Carpet_Interaction
+---
+<<if $day_count == 2>>
+    <<if $is_carpet_cleaned == false>>
+        Player: Something looks strange under this carpet...
+        -> Flip open carpet
+            <<start_carpet_minigame>>
+            <<set $is_carpet_cleaned = true>>
+        -> Leave it alone
+    <<else>>
+        Player: The carpet is clean and neat now. No secret mess hiding underneath!
+    <<endif>>
+<<else>>
+    Player: I don't have to clean this!
 <<endif>>
 ===
