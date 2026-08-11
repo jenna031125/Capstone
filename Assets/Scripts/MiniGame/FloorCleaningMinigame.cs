@@ -17,6 +17,10 @@ public class FloorCleaningMinigame : MonoBehaviour
     [SerializeField] private float _sweepAnimDuration = 0.15f;
     [SerializeField] private float _delayBeforeClose = 1.5f;
 
+    [Header("World Object")]
+    public SpriteRenderer obj;
+    public Sprite completedSprite;
+
     private bool _isComplete = false;
 
     void OnEnable()

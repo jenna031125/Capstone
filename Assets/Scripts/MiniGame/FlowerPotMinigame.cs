@@ -19,6 +19,10 @@ public class FlowerPotMinigame : MonoBehaviour
     private bool _isComplete = false;
     private bool _isHolding = false;
 
+    [Header("World Object")]
+    public SpriteRenderer obj;
+    public Sprite completedSprite;
+
     void OnEnable()
     {
         // Reset state every time minigame opens
@@ -67,6 +71,7 @@ public class FlowerPotMinigame : MonoBehaviour
     private void CompleteMinigame()
     {
         _isComplete = true;
+        obj.sprite = completedSprite;
         _isHolding = false;
 
         // 1. Swap to healthy flower sprite immediately

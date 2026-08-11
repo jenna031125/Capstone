@@ -9,6 +9,10 @@ public class DeskTidyingMinigame : MonoBehaviour
     [SerializeField] private float _delayBeforeClose = 1.5f;
     bool dialogueFinished;
 
+    [Header("World Object")]
+    public SpriteRenderer obj;
+    public Sprite completedSprite;
+
     private int _stackedCount = 0;
     public int StackedCount => _stackedCount;
 
@@ -33,6 +37,7 @@ public class DeskTidyingMinigame : MonoBehaviour
         Debug.Log("Desk is completely tidied!");
         yield return new WaitForSeconds(_delayBeforeClose);
         CloseMinigame();
+        obj.sprite = completedSprite;
     }
 
     public void CloseMinigame()

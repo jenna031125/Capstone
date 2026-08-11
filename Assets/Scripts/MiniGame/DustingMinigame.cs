@@ -19,6 +19,10 @@ public class DustingMinigame : MonoBehaviour, IPointerClickHandler
     [SerializeField] private float _clickAnimDuration = 0.15f;
     [SerializeField] private float _delayBeforeClose = 1.5f;
 
+    [Header("World Object")]
+    public SpriteRenderer obj;
+    public Sprite completedSprite;
+
     private int _currentClicks = 0;
     private bool _isComplete = false;
 
@@ -98,6 +102,7 @@ public class DustingMinigame : MonoBehaviour, IPointerClickHandler
     private void CompleteMinigame()
     {
         _isComplete = true;
+        obj.sprite = completedSprite;
         Cursor.visible = true;
         StartCoroutine(WaitAndCloseRoutine());
     }

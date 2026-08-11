@@ -15,6 +15,10 @@ public class FireplaceMinigame : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float _delayBeforeClose = 2.0f;
 
+    [Header("World Object")]
+    public SpriteRenderer obj;
+    public Sprite completedSprite;
+
     private int _woodPlacedCount = 0;
     private bool _isLit = false;
 

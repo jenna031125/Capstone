@@ -14,17 +14,32 @@
 ===
 title: Chef_Talk
 ---
-Chef: Hey! It's nice to see you.
-Chef: Need any munchies?
-
+<<if $has_photo_piece_3 == false>>
+    Chef: Ah, perfect timing! I was sweeping the kitchen floor and picked up this scrap of paper.
+    Chef: Looks like part of an old photograph. Here, take it.
+    
+    <<set $has_photo_piece_3 = true>>
+    
+    Player: Thank you! That makes another piece for the photo.
+<<else>>
+    Chef: The kitchen is clean for now. Don't let the fire go out!
+<<endif>>
 ===
 title: Owner_Talk
 ---
 Owner: . . .
 
 ===
-title: CoWork_Talk
+title: CoWorker_NPC
 ---
-Cowork: Hmm.
-Cowork: Come back after your shift is over.
+<<if $has_photo_piece_1 == false>>
+    CoWorker: Hey, I found this torn photo piece lying near the blocked door in the hallway.
+    CoWorker: It looks like garbage, but maybe you want it?
+    
+    <<set $has_photo_piece_1 = true>>
+    
+    Player: Oh, thanks! I'll hold onto it just in case.
+<<else>>
+    CoWorker: Make sure you get all your work done today, the Land Lady is strict!
+<<endif>>
 ===
