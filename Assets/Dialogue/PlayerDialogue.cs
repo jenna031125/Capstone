@@ -29,10 +29,6 @@ public class PlayerDialogue : MonoBehaviour
         dialogue.onDialogueComplete = dialogueCompleteEvent;
     }
 
-    public void DialogueComplete()
-    {
-        Debug.Log("Finished");
-    }
 
     [YarnCommand("play_animation")]
 

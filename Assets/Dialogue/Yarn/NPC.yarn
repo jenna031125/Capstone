@@ -30,7 +30,7 @@ title: Owner_Talk
 Owner: . . .
 
 ===
-title: CoWorker_NPC
+title: CoWorker_Talk
 ---
 <<if $has_photo_piece_1 == false>>
     CoWorker: Hey, I found this torn photo piece lying near the blocked door in the hallway.

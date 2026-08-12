@@ -24,7 +24,6 @@ public class FireplaceMinigame : MonoBehaviour
 
     void OnEnable()
     {
-        // Reset state
         _woodPlacedCount = 0;
         _isLit = false;
 
@@ -33,7 +32,6 @@ public class FireplaceMinigame : MonoBehaviour
             _fireplaceImage.sprite = _emptyFireplaceSprite;
         }
 
-        // Hide light fire button until logs are placed
         if (_lightFireButton != null)
         {
             _lightFireButton.gameObject.SetActive(false);
@@ -41,7 +39,6 @@ public class FireplaceMinigame : MonoBehaviour
             _lightFireButton.onClick.AddListener(OnFireplaceClicked);
         }
 
-        // Enable wood items
         foreach (var wood in _woodObjects)
         {
             if (wood != null) wood.SetActive(true);
@@ -52,7 +49,6 @@ public class FireplaceMinigame : MonoBehaviour
     {
         _woodPlacedCount++;
 
-        // All 3 woods placed! Enable click interaction on fireplace
         if (_woodPlacedCount >= 3)
         {
             if (_lightFireButton != null)
@@ -68,13 +64,11 @@ public class FireplaceMinigame : MonoBehaviour
 
         _isLit = true;
 
-        // Swap to fire sprite!
         if (_fireplaceImage != null && _litFireplaceSprite != null)
         {
             _fireplaceImage.sprite = _litFireplaceSprite;
         }
 
-        // Disable button click after lighting
         if (_lightFireButton != null)
         {
             _lightFireButton.interactable = false;
@@ -87,6 +81,7 @@ public class FireplaceMinigame : MonoBehaviour
     {
         yield return new WaitForSeconds(_delayBeforeClose);
         CloseMinigame();
+        obj.sprite = completedSprite;
     }
 
     public void CloseMinigame()

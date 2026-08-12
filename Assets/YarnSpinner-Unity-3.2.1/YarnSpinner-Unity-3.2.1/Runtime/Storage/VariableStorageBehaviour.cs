@@ -106,7 +106,6 @@ namespace Yarn.Unity
             }
             else
             {
-                Debug.Log($"Unable to determine kind of variable {name}: it is not stored in this variable storage, and {nameof(Program)} is not set");
                 return VariableKind.Unknown;
             }
         }
