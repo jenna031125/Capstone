@@ -56,7 +56,7 @@ Player: The pay.
 
 She rereads the number.
 
-Player: That’s more than I’d make in a month.
+Player: That’s more than I'd make in a month.
 
 The rain outside grows slightly louder.
 
@@ -95,11 +95,32 @@ Land Lady: A-ha. You saw the listing.
 
 Player: Yes... 
 
-(Story ongoing)
+Land Lady: Can you start tomorrow morning? 8:00 AM sharp.
 
-Let's move down to go to the workplace. 
+Player: Tomorrow morning? Ah, yes! I can do that.
 
-<<change_clothes Player Maid>>
-<<set $day_count = 1>>
-<<set $is_after_shift = false>>
+Land Lady: Good. I need someone who follows directions and works without causing any trouble. Do you understand?
+
+Player: Y-yes, of course. I won't cause any trouble.
+
+Land Lady: The address is 104 Blackwood Lane. Don't be late.
+
+Click.
+
+Player: ...Hello? She hung up.
+
+Player: 104 Blackwood Lane... Am I really going to be okay with this job?
+
+Player: ...I should look around my room and then get some sleep for tomorrow.
+
+<<set $has_finished_phone_call = true>>
 ===
+title: Mansion_Entrance_Arrival
+---
+Player: So this is the house... 
+
+Player: It's much bigger and darker than I imagined.
+
+Player: Well, no turning back now... Let's go knock on the door.
+===
+

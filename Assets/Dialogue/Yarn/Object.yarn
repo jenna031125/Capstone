@@ -19,6 +19,26 @@
 <<declare $has_photo_piece_2 = false>>
 <<declare $has_photo_piece_3 = false>>
 ===
+title: MyRoomBedInteraction
+---
+Should I go to sleep?
+->Yes
+    Player: I should get some sleep. Tomorrow is going to be a long day.
+    //make a black screen here//
+    *Yawn*...
+    Player: It's morning already. I better head out to work.
+->Not yet
+    Player: I don't want to sleep now. 
+===
+
+title: MyRoomDoor
+---
+Should I head to work now?
+->Yes
+    <<teleport_player Mansion_Entrance>>
+->No
+===
+
 title: Diary
 ---
 An old diary with empty pages.
