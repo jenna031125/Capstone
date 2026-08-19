@@ -115,6 +115,7 @@ Player: ...I should look around my room and then get some sleep for tomorrow.
 
 <<set $has_finished_phone_call = true>>
 ===
+
 title: Mansion_Entrance_Arrival
 ---
 Player: So this is the house... 
@@ -124,3 +125,30 @@ Player: It's much bigger and darker than I imagined.
 Player: Well, no turning back now... Let's go knock on the door.
 ===
 
+title: First_Talk
+---
+Before you try to knock on the door, the door open by itself.
+
+Player: ...!
+
+Butler: You arrived just on time. 
+
+Butler: Come on in. 
+
+*Follow her up to the living room*
+
+Butler: This is our living room. You will be working upstairs.
+
+Butler: The first room you see when you get up there. 
+
+*takes to the hallway*
+
+Butler: This is your room here. Rest today, and your work will start from tomorrow.
+
+Butler: And wear these while you stay here. 
+
+*hands the uniform*
+
+Butler: ... You can do anything you like, but just one rule you must follow.
+addmore
+===

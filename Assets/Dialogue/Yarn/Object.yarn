@@ -18,25 +18,37 @@
 <<declare $has_photo_piece_1 = false>>
 <<declare $has_photo_piece_2 = false>>
 <<declare $has_photo_piece_3 = false>>
+
+<<declare $has_slept = false>>
+
 ===
 title: MyRoomBedInteraction
 ---
 Should I go to sleep?
-->Yes
+-> Yes
     Player: I should get some sleep. Tomorrow is going to be a long day.
-    //make a black screen here//
+    // make a black screen here //
+    <<set $has_slept = true>>
     *Yawn*...
     Player: It's morning already. I better head out to work.
-->Not yet
-    Player: I don't want to sleep now. 
+-> Not yet
+    Player: I don't want to sleep now.
 ===
 
 title: MyRoomDoor
 ---
-Should I head to work now?
-->Yes
-    <<teleport_player Mansion_Entrance>>
-->No
+<<if $has_slept == true>>
+    Should I head to work now?
+    -> Yes
+        Player: Time to head out...
+        <<teleport_with_delay Mansion_Entrance_Transition 2.5>>
+    -> No
+        Player: Let me double check if I forgot anything.
+<<elseif $has_finished_phone_call == true>>
+    Player: I need to get some sleep before going to work.
+<<else>>
+    Player: It's not time to go outside.
+<<endif>>
 ===
 
 title: Diary

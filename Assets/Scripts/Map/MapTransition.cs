@@ -80,12 +80,12 @@ public class MapTransition : MonoBehaviour
         player.transform.position = newPos;
     }
 
-    // --- YARN SPINNER COMMAND ---
-    // Usage in Yarn: <<teleport_player Mansion_Entrance>>
-    [YarnCommand("teleport_player")]
-    public static async Task TeleportPlayerCommand(string transitionObjectName)
+    // --- YARN SPINNER COMMAND WITH DELAY ---
+    // Usage in Yarn: <<teleport_with_delay TransitionObjectName HoldDurationSeconds>>
+    // Example: <<teleport_with_delay Mansion_Entrance_Transition 2.5>>
+    [YarnCommand("teleport_with_delay")]
+    public static async Task TeleportWithDelayCommand(string transitionObjectName, float holdBlackSeconds)
     {
-        // Find the specific MapTransition object in the scene by name
         GameObject transitionObj = GameObject.Find(transitionObjectName);
         GameObject player = GameObject.FindWithTag("Player");
 
@@ -94,12 +94,33 @@ public class MapTransition : MonoBehaviour
             MapTransition mapTransition = transitionObj.GetComponent<MapTransition>();
             if (mapTransition != null)
             {
-                await mapTransition.FadeTransition(player);
+                // 1. Fade to Black
+                if (ScreenFader.instance != null)
+                {
+                    await ScreenFader.instance.FadeOut();
+                }
+
+                // 2. Wait while screen is completely black (play SFX during this window!)
+                int delayMilliseconds = Mathf.RoundToInt(holdBlackSeconds * 1000f);
+                await Task.Delay(delayMilliseconds);
+
+                // 3. Teleport & Update Camera Confiner behind the black screen
+                if (mapTransition.confiner != null && mapTransition.mapBoundary != null)
+                {
+                    mapTransition.confiner.m_BoundingShape2D = mapTransition.mapBoundary;
+                }
+                mapTransition.UpdatePlayerPosition(player);
+
+                // 4. Fade back in
+                if (ScreenFader.instance != null)
+                {
+                    await ScreenFader.instance.FadeIn();
+                }
             }
         }
         else
         {
-            Debug.LogWarning($"[MapTransition] Could not find transition object named '{transitionObjectName}' or Player object.");
+            Debug.LogWarning($"[MapTransition] Could not find transition object '{transitionObjectName}' or Player.");
         }
     }
 }
