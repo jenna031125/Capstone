@@ -35,6 +35,12 @@ Should I go to sleep?
     Player: I don't want to sleep now.
 ===
 
+title: LivingRoom_Exit
+---
+
+Alice: I shouldn't leave now...
+===
+
 title: MyRoomDoor
 ---
 <<if $has_slept == true>>
@@ -151,9 +157,12 @@ Player: Should I take it?
 ->Leave it
     Well, I don't want to make any problems. 
 ===
+
 title: Go_To_Sleep
 ---
-<<if $day_count == 1 and $is_floor_left_clean and $is_pot_watered and $is_desk_cleaned_day1>>
+<<if $day_count == 0>>
+    <<set $can_sleep = true>>
+<<elseif $day_count == 1 and $is_floor_left_clean and $is_pot_watered and $is_desk_cleaned_day1>>
     <<set $can_sleep = true>>
 <<elseif $day_count == 2 and $is_carpet_cleaned and $is_fireplace_cleaned_day2 and $is_frame_cleaned>>
     <<set $can_sleep = true>>
@@ -164,22 +173,29 @@ title: Go_To_Sleep
 <<endif>>
 
 <<if $can_sleep == false>>
-    Player: I can't go to sleep yet! I haven't finished all my cleaning tasks for today.
+    Alice: I can't go to sleep yet! I haven't finished all my cleaning tasks for today.
 <<else>>
-    Player: Should I go to sleep?
+    Alice: Should I go to sleep?
     -> Yes
         <<if $day_count < 3>>
             (You lay down and fall into a deep sleep...)
             <<set $day_count += 1>>
+            
+            // Reset minigames in Unity so they can be re-played on Day 3!
+            <<reset_desk_minigame>>
+            <<reset_fireplace_minigame>>
+            
             Next day: Day {$day_count}.
         <<else>>
-            (The three days are up. You've completed your time at the mansion...)
-            The story concludes here.
+            (You lay down and fall into a deep sleep...)
+            <<set $day_count += 1>>
+            <<jump Normal_Ending>>
         <<endif>>
     -> No
         (You decide to stay up a bit longer.)
 <<endif>>
 ===
+
 title: Flower_Pot
 ---
 <<if $day_count == 1>>

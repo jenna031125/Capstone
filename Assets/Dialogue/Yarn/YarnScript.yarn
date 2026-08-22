@@ -126,29 +126,131 @@ Player: Well, no turning back now... Let's go knock on the door.
 ===
 
 title: First_Talk
+
 ---
-Before you try to knock on the door, the door open by itself.
 
-Player: ...!
 
-Butler: You arrived just on time. 
 
-Butler: Come on in. 
+*press E on the mansion door, cutscene start without asking (controls locked)*
 
-*Follow her up to the living room*
+Before you try to knock on the door, the door opens by itself.
+
+
+
+Alice: ...! He-Hello.
+
+
+
+Butler: You arrived just on time. Come on in.
+
+
+
+*Both move into the mansion*
+<<teleport_with_delay LivingRoom_Transition 2.0>>
+
 
 Butler: This is our living room. You will be working upstairs.
 
-Butler: The first room you see when you get up there. 
+Butler: The first room you see when you get up there.
 
-*takes to the hallway*
+
+
+*camera moves up to the 2nd floor hallway, and comes back*
+
+
 
 Butler: This is your room here. Rest today, and your work will start from tomorrow.
 
-Butler: And wear these while you stay here. 
+Butler: And wear these while you stay here.
 
-*hands the uniform*
+
+
+*butler turns around to alice, hands the uniform*
+
+
 
 Butler: ... You can do anything you like, but just one rule you must follow.
-addmore
+
+Butler: Stay inside your room late at night. Do not wander around after hours.
+
+
+
+Butler: As for today, you are free to rest and look around the mansion. Just make sure not to cause any trouble.
+
+Butler: I will see you tomorrow morning.
+
+Alice: Ah, thank...
+
+
+
+*The Butler leaves*
+
+
+
+Alice: ... She just left. 
+
+
+
+*Alice steps inside her assigned room*
+<<teleport_with_delay Bedroom_Transition 1.0>>
+
+
+
+Alice: Wow... it's really old and small.
+
+Alice: Well, at least it has a bed...
+
+Alice: Before I look around the mansion, I should change into the maid uniform first.
+
+
+
+<<change_clothes Maid>>
+
+
+
+Alice: Alright, everything fits. Time to explore.
+
+===
+
+title: Normal_Ending
+---
+(The sun rises on Day {$day_count}. You've completed your 3 days of work at the mansion...)
+
+Alice: My time here is done. Let's get changed first...
+
+<<change_clothes Modern>>
+===
+
+title: Normal_Ending_Cutscene
+---
+// This runs as soon as Alice steps on the trigger box outside the Bedroom on Day4
+Alice: !
+Butler: Good morning.
+Alice: Ah, good mor-
+Butler: You have done a great job for last three days.
+Butler: Money is sent through your bank accound this morning.
+Alice: Oh, thank... thank you. 
+Alice: 'That was very quick...'
+Butler: You may leave as soon as you pack up.
+-> Alice: Can I say good byes to other people before I leave?
+    Butler: No, I need you to leave ASAP. 
+    Alice: 'She's in such a hurry...'
+    Alice: O, okay.
+    Butler: I'll walk you to the door. 
+-> Alice: I think I'm ready to leave.
+    Butler: Great. I'll walk you to the door. 
+
+<<teleport_with_delay Exit_Transition 2.5>>
+
+Alice: ...
+Alice: That felt like a dream...
+Alice: ...
+Alice: ......
+Alice: Let's go home. 
+
+===
+title: Normal_Ending_Credit
+---
+
+Normal Ending Finished.
 ===

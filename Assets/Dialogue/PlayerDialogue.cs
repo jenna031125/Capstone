@@ -46,16 +46,19 @@ public class PlayerDialogue : MonoBehaviour
 
     // --- NEW: Yarn Command to change clothes ---
     [YarnCommand("change_clothes")]
-    public void ChangeClothes(string outfitName)
+    public static void ChangeClothes(string outfitName)
     {
+        PlayerDialogue player = FindFirstObjectByType<PlayerDialogue>();
+        if (player == null) return;
+
         if (outfitName == "Maid")
         {
-            playerSpriteRenderer.sprite = maidSprite;
+            player.playerSpriteRenderer.sprite = player.maidSprite;
             Debug.Log("Changed into Maid Costume");
         }
         else if (outfitName == "Modern")
         {
-            playerSpriteRenderer.sprite = modernSprite;
+            player.playerSpriteRenderer.sprite = player.modernSprite;
             Debug.Log("Changed into Modern Clothes");
         }
         else
@@ -63,6 +66,5 @@ public class PlayerDialogue : MonoBehaviour
             Debug.LogWarning("Outfit not found! Check your spelling in Yarn.");
         }
     }
-
 
 }

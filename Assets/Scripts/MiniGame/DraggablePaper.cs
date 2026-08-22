@@ -85,4 +85,19 @@ public class DraggablePaper : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
             _manager.OnPaperStacked();
         }
     }
+
+    public void ResetPaper()
+    {
+        _isStacked = false;
+        if (_canvasGroup != null)
+        {
+            _canvasGroup.blocksRaycasts = true;
+        }
+
+        // Return paper to its initial unstacked position
+        if (_rectTransform != null)
+        {
+            _rectTransform.anchoredPosition = _startPosition;
+        }
+    }
 }

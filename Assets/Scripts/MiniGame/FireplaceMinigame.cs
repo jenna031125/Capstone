@@ -19,8 +19,17 @@ public class FireplaceMinigame : MonoBehaviour
     public SpriteRenderer obj;
     public Sprite completedSprite;
 
+    private Sprite _originalColdSprite; // Remembers cold fireplace sprite
     private int _woodPlacedCount = 0;
     private bool _isLit = false;
+
+    void Awake()
+    {
+        if (obj != null)
+        {
+            _originalColdSprite = obj.sprite;
+        }
+    }
 
     void OnEnable()
     {
@@ -35,6 +44,7 @@ public class FireplaceMinigame : MonoBehaviour
         if (_lightFireButton != null)
         {
             _lightFireButton.gameObject.SetActive(false);
+            _lightFireButton.interactable = true;
             _lightFireButton.onClick.RemoveAllListeners();
             _lightFireButton.onClick.AddListener(OnFireplaceClicked);
         }
@@ -81,7 +91,10 @@ public class FireplaceMinigame : MonoBehaviour
     {
         yield return new WaitForSeconds(_delayBeforeClose);
         CloseMinigame();
-        obj.sprite = completedSprite;
+        if (obj != null && completedSprite != null)
+        {
+            obj.sprite = completedSprite;
+        }
     }
 
     public void CloseMinigame()
@@ -89,7 +102,7 @@ public class FireplaceMinigame : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // --- YARN SPINNER COMMAND ---
+    // --- YARN SPINNER COMMANDS ---
     [YarnCommand("start_fireplace_minigame")]
     public static void StartFireplaceCommand()
     {
@@ -97,6 +110,42 @@ public class FireplaceMinigame : MonoBehaviour
         if (minigame != null)
         {
             minigame.gameObject.SetActive(true);
+        }
+    }
+
+    [YarnCommand("reset_fireplace_minigame")]
+    public static void ResetFireplaceCommand()
+    {
+        FireplaceMinigame minigame = FindFirstObjectByType<FireplaceMinigame>(FindObjectsInactive.Include);
+        if (minigame != null)
+        {
+            minigame.ResetMinigameState();
+        }
+    }
+
+    public void ResetMinigameState()
+    {
+        _woodPlacedCount = 0;
+        _isLit = false;
+
+        // 1. Revert world object back to cold/unlit sprite
+        if (obj != null && _originalColdSprite != null)
+        {
+            obj.sprite = _originalColdSprite;
+        }
+
+        // 2. Reset UI button
+        if (_lightFireButton != null)
+        {
+            _lightFireButton.gameObject.SetActive(false);
+            _lightFireButton.interactable = true;
+        }
+
+        // 3. Reset draggable wood items
+        DraggableWood[] woods = GetComponentsInChildren<DraggableWood>(true);
+        foreach (DraggableWood wood in woods)
+        {
+            wood.ResetWood();
         }
     }
 }

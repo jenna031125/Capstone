@@ -3,8 +3,8 @@ using UnityEngine.EventSystems;
 
 public class DraggableWood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    [SerializeField] private RectTransform _dropTarget; // Assign the DropTargetArea here
-    [SerializeField] private float _dropDistanceThreshold = 150f; // Max pixel distance to register a drop
+    [SerializeField] private RectTransform _dropTarget;
+    [SerializeField] private float _dropDistanceThreshold = 150f;
 
     private Vector3 _startPosition;
     private CanvasGroup _canvasGroup;
@@ -26,7 +26,6 @@ public class DraggableWood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     void OnEnable()
     {
-        // Remember starting position to reset if missed
         _startPosition = _rectTransform.anchoredPosition;
         _isPlaced = false;
         gameObject.SetActive(true);
@@ -36,13 +35,13 @@ public class DraggableWood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (_isPlaced) return;
-        _canvasGroup.blocksRaycasts = false; // Lets mouse see target underneath
+        _canvasGroup.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         if (_isPlaced) return;
-        _rectTransform.position = Input.mousePosition; // Move with mouse
+        _rectTransform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -50,15 +49,13 @@ public class DraggableWood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (_isPlaced) return;
         _canvasGroup.blocksRaycasts = true;
 
-        // Check distance between wood drop location and target area
         if (_dropTarget != null)
         {
             float distance = Vector2.Distance(_rectTransform.position, _dropTarget.position);
             if (distance <= _dropDistanceThreshold)
             {
-                // Successful Drop!
                 _isPlaced = true;
-                gameObject.SetActive(false); // Hide log from bottom right
+                gameObject.SetActive(false);
 
                 if (_manager != null)
                 {
@@ -68,7 +65,21 @@ public class DraggableWood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             }
         }
 
-        // Return to start position if missed
         _rectTransform.anchoredPosition = _startPosition;
+    }
+
+    // --- RESET METHOD ---
+    public void ResetWood()
+    {
+        _isPlaced = false;
+        gameObject.SetActive(true);
+        if (_canvasGroup != null)
+        {
+            _canvasGroup.blocksRaycasts = true;
+        }
+        if (_rectTransform != null)
+        {
+            _rectTransform.anchoredPosition = _startPosition;
+        }
     }
 }
