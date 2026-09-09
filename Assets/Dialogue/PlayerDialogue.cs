@@ -14,8 +14,8 @@ public class PlayerDialogue : MonoBehaviour
 
     // --- NEW: Sprite change variables ---
     public SpriteRenderer playerSpriteRenderer; // The component that draws the player
-    public Sprite modernSprite;                 // Her normal clothes
-    public Sprite maidSprite;                   // Her work clothes
+    public GameObject modernSprite;                 // Her normal clothes
+    public GameObject maidSprite;                   // Her work clothes
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -53,12 +53,14 @@ public class PlayerDialogue : MonoBehaviour
 
         if (outfitName == "Maid")
         {
-            player.playerSpriteRenderer.sprite = player.maidSprite;
+            player.maidSprite.SetActive(true);
+            player.modernSprite.SetActive(false);
             Debug.Log("Changed into Maid Costume");
         }
         else if (outfitName == "Modern")
         {
-            player.playerSpriteRenderer.sprite = player.modernSprite;
+            player.maidSprite.SetActive(false);
+            player.modernSprite.SetActive(true);
             Debug.Log("Changed into Modern Clothes");
         }
         else

@@ -52,5 +52,25 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.linearVelocity = Vector2.zero;
         }
+
+        FlipSprite();
+    }
+
+    void FlipSprite()
+    {
+        if (_movement.x > 0)
+        {
+            //play the right animaion
+            transform.localEulerAngles = new Vector3(0, 180, 0);
+        }
+        else if (_movement.x < 0)
+        {
+            // play the left animation
+            transform.localEulerAngles = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            //play the idle animation.
+        }
     }
 }
