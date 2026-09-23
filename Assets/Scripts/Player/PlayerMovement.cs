@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
     private Vector2 _movement;
     private Rigidbody2D _rb;
+    private Animator _animator;
 
     // We keep this public so you can see it working in the Inspector
     public bool canMove = true;
@@ -29,6 +30,23 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
+        // 예시 코드
+        void Update()
+        {
+            // 1. 이동 입력 값 받아오기
+            _movement.x = Input.GetAxisRaw("Horizontal");
+            _movement.y = Input.GetAxisRaw("Vertical");
+
+            // _animator (언더바 붙임)로 변경
+            _animator.SetFloat("MoveX", _movement.x);
+            _animator.SetFloat("MoveY", _movement.y);
+            _animator.SetBool("IsWalking", _movement.sqrMagnitude > 0.01f);
+
+            // 3. 스프라이트 반전
+            FlipSprite();
+        }
+
         // AUTOMATION: If the runner isn't running, ensure the player is unfrozen
         if (_dialogueRunner != null && !_dialogueRunner.IsDialogueRunning && !canMove)
         {
