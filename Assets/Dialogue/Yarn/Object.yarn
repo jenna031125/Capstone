@@ -103,9 +103,10 @@ Among the old plates, you see something heavy...
 Player: I found a crowbar!
 <<set $has_crowbar = true>>
 ===
-title: Dining_Cutlery
+title: Clean_Cutlery
 ---
-There are set of cutleries...
+There are set of clean utleries...
+I wonder why this is the only clean one.
 
 ->Take it
     Player: It's dusty, but I'll might use this somewhere.
@@ -117,7 +118,7 @@ title: Dining_Drawing
 There is an old drawing of a man in Victorian-era clothing with black hair.
 Player: It's too foggy, I can't see it well... 
 ===
-title: Dining_Table
+title: Dirty_plates
 ---
 The dust on the table doesn't wipe off even when touched.
 Player: How many years does it take for dust to harden like stone like this...?
@@ -131,13 +132,6 @@ Player: ......!!!
 Player: Blood stain?!
 Player: ...... Oh.
 Player: It's just a wine stain.
-===
-title: Dining_CleanSeat
----
-Player: What a dusty table...
-Player: Huh? 
-Player: This spot is clean for some reason...
-Player: It seems like someone had been using this seat until recently.
 ===
 title: Cutting_Board
 ---
