@@ -79,21 +79,20 @@ Player: There's no handle attatched to this. I can't open the window...
 ===
 title: Blocked_Door
 ---
-The door is blocked with wood planks.
+Alice: The door is blocked with wood planks.
 
-->Open
+-> Open
     <<if $has_crowbar == true>>
-        I can try with my crowbar... 
-        (Sound of wood splintering!)
-        The planks are gone. The path is clear.
+        Alice: I can try with my crowbar...
+        <<remove_wood_planks>>
+        Alice: The planks are gone. The path is clear.
         <<set $door_opened = true>>
     <<else>>
-        I can't open that with my bare hands, I might need a tool.
+        Alice: I can't open this with my bare hands.
+        Alice: I might need to look for a tool...
     <<endif>>
-    Player: I can't open this with my bare hands.
-    Player: I might need to look for a tool...
-->Ignore
-    Player: It should be blocked for a reason...
+-> Ignore
+    Alice: It should be blocked for a reason...
 
 ===
 title: Cupboard

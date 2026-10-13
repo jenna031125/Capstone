@@ -28,13 +28,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
 
-        _animator.SetFloat("MoveX", _movement.x);
-        _animator.SetFloat("MoveY", _movement.y);
-        _animator.SetBool("IsWalking", _movement.sqrMagnitude > 0.01f);
+        Animator activeAnimator = GetComponentInChildren<Animator>();
+
+        if (activeAnimator != null)
+        {
+            activeAnimator.SetFloat("MoveX", _movement.x);
+            activeAnimator.SetFloat("MoveY", _movement.y);
+            activeAnimator.SetBool("IsWalking", _movement.sqrMagnitude > 0.01f);
+        }
 
         FlipSprite();
 
@@ -63,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
 
         FlipSprite();
     }
-
     void FlipSprite()
     {
         if (_movement.x > 0)
