@@ -4,7 +4,7 @@ using Yarn.Unity;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 5f;
-    private Vector2 _movement;
+    public Vector2 _movement;
     private Rigidbody2D _rb;
     [SerializeField] private Animator _animator;
 
@@ -28,8 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        _movement.x = Input.GetAxisRaw("Horizontal");
-        _movement.y = Input.GetAxisRaw("Vertical");
+        //_movement.x = Input.GetAxisRaw("Horizontal");
+        //_movement.y = Input.GetAxisRaw("Vertical");
 
         Animator activeAnimator = GetComponentInChildren<Animator>();
 
@@ -38,9 +38,15 @@ public class PlayerMovement : MonoBehaviour
             activeAnimator.SetFloat("MoveX", _movement.x);
             activeAnimator.SetFloat("MoveY", _movement.y);
             activeAnimator.SetBool("IsWalking", _movement.sqrMagnitude > 0.01f);
+
+            if (_movement != Vector2.zero)
+            {
+                activeAnimator.SetFloat("LastMoveX", _movement.x);
+                activeAnimator.SetFloat("LastMoveY", _movement.y);
+            }
         }
 
-        FlipSprite();
+        //FlipSprite();
 
         if (_dialogueRunner != null && !_dialogueRunner.IsDialogueRunning && !canMove)
         {
@@ -64,6 +70,8 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.linearVelocity = Vector2.zero;
         }
+
+
 
         FlipSprite();
     }
