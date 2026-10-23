@@ -26,10 +26,12 @@ public class DraggableWood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     void OnEnable()
     {
-        _startPosition = _rectTransform.anchoredPosition;
-        _isPlaced = false;
-        gameObject.SetActive(true);
-        _canvasGroup.blocksRaycasts = true;
+        // 초기 시작 위치 기억 (Reset용)
+        if (_startPosition == Vector3.zero)
+        {
+            _startPosition = _rectTransform.anchoredPosition;
+        }
+        ResetWood();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -47,24 +49,29 @@ public class DraggableWood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnEndDrag(PointerEventData eventData)
     {
         if (_isPlaced) return;
-        _canvasGroup.blocksRaycasts = true;
 
         if (_dropTarget != null)
         {
             float distance = Vector2.Distance(_rectTransform.position, _dropTarget.position);
             if (distance <= _dropDistanceThreshold)
             {
+                // 성공적 드롭: 위치를 타겟 위치(벽난로 안)로 이동하고 고정
                 _isPlaced = true;
-                gameObject.SetActive(false);
+                _rectTransform.position = _dropTarget.position;
+
+                // 더 이상 드래그하거나 클릭되지 않도록 조치
+                _canvasGroup.blocksRaycasts = false;
 
                 if (_manager != null)
                 {
-                    _manager.OnWoodPlaced();
+                    _manager.OnWoodPlaced(this);
                 }
                 return;
             }
         }
 
+        // 실패 시 제자리 복귀
+        _canvasGroup.blocksRaycasts = true;
         _rectTransform.anchoredPosition = _startPosition;
     }
 
@@ -77,7 +84,7 @@ public class DraggableWood : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             _canvasGroup.blocksRaycasts = true;
         }
-        if (_rectTransform != null)
+        if (_rectTransform != null && _startPosition != Vector3.zero)
         {
             _rectTransform.anchoredPosition = _startPosition;
         }

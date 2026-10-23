@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 96720dfbbfa1d7d4e98015af41fcaf0e
+guid: 7705f2a541eb1dd46b5d2f9e102073f2
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -103,10 +103,10 @@ TextureImporter:
       name: Blood_0
       rect:
         serializedVersion: 2
-        x: 769
-        y: 1089
-        width: 82
-        height: 57
+        x: 1201
+        y: 1101
+        width: 98
+        height: 103
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

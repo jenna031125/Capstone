@@ -26,13 +26,33 @@ title: MyRoomBedInteraction
 ---
 Should I go to sleep?
 -> Yes
-    Player: I should get some sleep. Tomorrow is going to be a long day.
-    // make a black screen here //
+    Alice: I should get some sleep. Tomorrow is going to be a long day.
+    <<fade_screen_sleep>>
     <<set $has_slept = true>>
     *Yawn*...
-    Player: It's morning already. I better head out to work.
+    Alice: It's time to go already. I better head out to work.
 -> Not yet
-    Player: I don't want to sleep now.
+    Alice: I don't want to sleep now.
+===
+
+title: MyRoomCupboard
+---
+Alice: Plain clothes are hanging inside.
+===
+
+title: MyRoomClothes
+---
+Alice: Unorganized clothes are scattered all over the floor.
+===
+
+title: MyRoomDesk
+---
+Alice: Various bills and notices are spread across the desk.
+===
+
+title: MyRoomWindow
+---
+Alice: It doesn't look like the rain is going to stop anytime soon.
 ===
 
 title: LivingRoom_Exit
@@ -46,14 +66,14 @@ title: MyRoomDoor
 <<if $has_slept == true>>
     Should I head to work now?
     -> Yes
-        Player: Time to head out...
+        Alice: Time to head out...
         <<teleport_with_delay Mansion_Entrance_Transition 2.5>>
     -> No
-        Player: Let me double check if I forgot anything.
+        Alice: Let me double check if I forgot anything.
 <<elseif $has_finished_phone_call == true>>
-    Player: I need to get some sleep before going to work.
+    Alice: I need to get some sleep before going to work.
 <<else>>
-    Player: It's not time to go outside.
+    Alice: It's not time to go outside.
 <<endif>>
 ===
 
@@ -68,14 +88,14 @@ title: Book_Shelf
 ---
 Old books covered with dust. 
 Seems like no one had been using it for a long time...
-Player: Uh... maybe let's not touch it. 
+Alice: Uh... maybe let's not touch it. 
 ===
 title: BR_Window
 ---
-Player: Ew, spider web... Why is it so foggy?
-Player: I can't even look outside properly...
-Player: ... Hmm?
-Player: There's no handle attatched to this. I can't open the window...
+Alice: Ew, spider web... Why is it so foggy?
+Alice: I can't even look outside properly...
+Alice: ... Hmm?
+Alice: There's no handle attatched to this. I can't open the window...
 ===
 title: Blocked_Door
 ---
@@ -99,7 +119,7 @@ title: Cupboard
 ---
 You look inside the dusty cupboard.
 Among the old plates, you see something heavy...
-Player: I found a crowbar!
+Alice: I found a crowbar!
 <<set $has_crowbar = true>>
 ===
 title: Clean_Cutlery
@@ -108,44 +128,44 @@ There are set of clean utleries...
 I wonder why this is the only clean one.
 
 ->Take it
-    Player: It's dusty, but I'll might use this somewhere.
+    Alice: It's dusty, but I'll might use this somewhere.
     <<set $has_cutlery = true>>
 ->Leave it
 ===
 title: Dining_Drawing
 ---
 There is an old drawing of a man in Victorian-era clothing with black hair.
-Player: It's too foggy, I can't see it well... 
+Alice: It's too foggy, I can't see it well... 
 ===
 title: Dirty_plates
 ---
 The dust on the table doesn't wipe off even when touched.
-Player: How many years does it take for dust to harden like stone like this...?
+Alice: How many years does it take for dust to harden like stone like this...?
 ===
 title: Dining_Carpet
 ---
-Player: Hmm? This is...
-Player: ...
-Player: ......
-Player: ......!!!
-Player: Blood stain?!
-Player: ...... Oh.
-Player: It's just a wine stain.
+Alice: Hmm? This is...
+Alice: ...
+Alice: ......
+Alice: ......!!!
+Alice: Blood stain?!
+Alice: ...... Oh.
+Alice: It's just a wine stain.
 ===
 title: Cutting_Board
 ---
 This is where the chef was slicing meat just moments ago.
-Player: Is it beef for dinner tonight? Yum!
+Alice: Is it beef for dinner tonight? Yum!
 ===
 title: Cooking_Knife
 ---
 It's a very sharp knife.
-Player: Should I take it?
+Alice: Should I take it?
 
 ->Take it
-    Player: This looks perfect to protect myself from danger...
+    Alice: This looks perfect to protect myself from danger...
     Chef: Hey! Hands off there!
-    Player: S-Sorry, sir!
+    Alice: S-Sorry, sir!
     I hurriedly put it down. I got scolded and didn't even get the knife...
 ->Leave it
     Well, I don't want to make any problems. 
@@ -172,6 +192,7 @@ title: Go_To_Sleep
     -> Yes
         <<if $day_count < 3>>
             (You lay down and fall into a deep sleep...)
+            <<fade_screen_sleep>>
             <<set $day_count += 1>>
             
             // Reset minigames in Unity so they can be re-played on Day 3!
@@ -181,6 +202,7 @@ title: Go_To_Sleep
             Next day: Day {$day_count}.
         <<else>>
             (You lay down and fall into a deep sleep...)
+            <<fade_screen_sleep>>
             <<set $day_count += 1>>
             <<jump Normal_Ending>>
         <<endif>>
@@ -193,161 +215,161 @@ title: Flower_Pot
 ---
 <<if $day_count == 1>>
     <<if $is_pot_watered == false>>
-        Player: Should I water this flower for my work shift?
+        Alice: Should I water this flower for my work shift?
         -> Yes
             <<start_watering_minigame>>
             <<set $is_pot_watered = true>>
             <<jump Check_Daily_Progress>>
         -> No
-            Player: I'll do it later.
+            Alice: I'll do it later.
     <<else>>
-        Player: The flower looks healthy and watered now!
+        Alice: The flower looks healthy and watered now!
     <<endif>>
 <<else>>
-    Player: I don't have to clean this!
+    Alice: I don't have to clean this!
 <<endif>>
 ===
 title: Fireplace
 ---
 <<if $day_count == 2>>
     <<if $is_fireplace_cleaned_day2 == false>>
-        Player: The fireplace is cold. I should prepare some firewood.
+        Alice: The fireplace is cold. I should prepare some firewood.
         -> Light Fire
             <<start_fireplace_minigame>>
             <<set $is_fireplace_cleaned_day2 = true>>
             <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
-        Player: The fire is burning nicely now.
+        Alice: The fire is burning nicely now.
     <<endif>>
 
 <<elseif $day_count == 3>>
     <<if $is_fireplace_cleaned_day3 == false>>
-        Player: The fireplace is cold. I should prepare some firewood.
+        Alice: The fireplace is cold. I should prepare some firewood.
         -> Light Fire
             <<start_fireplace_minigame>>
             <<set $is_fireplace_cleaned_day3 = true>>
             <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
-        Player: The fire is burning nicely now.
+        Alice: The fire is burning nicely now.
     <<endif>>
 
 <<else>>
-    Player: I don't have to clean this!
+    Alice: I don't have to clean this!
 <<endif>>
 ===
 title: Office_Frame
 ---
 <<if $day_count == 2>>
     <<if $is_frame_cleaned == false>>
-        Player: This old painting is covered in thick dust.
+        Alice: This old painting is covered in thick dust.
         -> Clean Painting
             <<start_dusting_minigame>>
             <<set $is_frame_cleaned = true>>
             <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
-        Player: The portrait looks much cleaner now.
+        Alice: The portrait looks much cleaner now.
     <<endif>>
 <<else>>
-    Player: I don't have to clean this!
+    Alice: I don't have to clean this!
 <<endif>>
 ===
 title: Office_Desk
 ---
 <<if $day_count == 1>>
     <<if $is_desk_cleaned_day1 == false>>
-        Player: There are papers and books scattered all over the desk.
+        Alice: There are papers and books scattered all over the desk.
         -> Tidy up desk
             <<start_desk_minigame>>
             <<set $is_desk_cleaned_day1 = true>>
             <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
-        Player: The desk is neat and organised now.
+        Alice: The desk is neat and organised now.
     <<endif>>
 
 <<elseif $day_count == 3>>
     <<if $is_desk_cleaned_day3 == false>>
-        Player: There are papers and books scattered all over the desk.
+        Alice: There are papers and books scattered all over the desk.
         -> Tidy up desk
             <<start_desk_minigame>>
             <<set $is_desk_cleaned_day3 = true>>
             <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
-        Player: The desk is neat and organised now.
+        Alice: The desk is neat and organised now.
     <<endif>>
 
 <<else>>
-    Player: I don't have to clean this!
+    Alice: I don't have to clean this!
 <<endif>>
 ===
 title: Floor_Sweep_Right
 ---
 <<if $day_count == 3>>
     <<if $is_floor_right_clean == false>>
-        Player: There is dust gathered here too.
+        Alice: There is dust gathered here too.
         -> Sweep floor
             <<start_floor_minigame_right>>
             <<set $is_floor_right_clean = true>>
             <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
-        Player: This spot is already clean.
+        Alice: This spot is already clean.
     <<endif>>
 <<else>>
-    Player: I don't have to clean this!
+    Alice: I don't have to clean this!
 <<endif>>
 ===
 title: Floor_Sweep_Left
 ---
 <<if $day_count == 1>>
     <<if $is_floor_left_clean == false>>
-        Player: This spot needs sweeping.
+        Alice: This spot needs sweeping.
         -> Sweep floor
             <<start_floor_minigame_left>>
             <<set $is_floor_left_clean = true>>
             <<jump Check_Daily_Progress>>
         -> Leave it
     <<else>>
-        Player: This spot is already clean.
+        Alice: This spot is already clean.
     <<endif>>
 <<else>>
-    Player: I don't have to clean this!
+    Alice: I don't have to clean this!
 <<endif>>
 ===
 title: Carpet_Interaction
 ---
 <<if $day_count == 2>>
     <<if $is_carpet_cleaned == false>>
-        Player: Something looks strange under this carpet...
+        Alice: Something looks strange under this carpet...
         -> Flip open carpet
             <<start_carpet_minigame>>
             <<set $is_carpet_cleaned = true>>
             <<set $has_photo_piece_2 = true>>
             
-            Player: Am I supposed to throw this photo piece too? Let's keep it just in case.
+            Alice: Am I supposed to throw this photo piece too? Let's keep it just in case.
             
             <<jump Check_Daily_Progress>>
         -> Leave it alone
     <<else>>
-        Player: The carpet is clean and neat now. No secret mess hiding underneath!
+        Alice: The carpet is clean and neat now. No secret mess hiding underneath!
     <<endif>>
 <<else>>
-    Player: I don't have to clean this!
+    Alice: I don't have to clean this!
 <<endif>>
 ===
 title: Check_Daily_Progress
 ---
 <<if $day_count == 1 and $is_floor_left_clean and $is_pot_watered and $is_desk_cleaned_day1>>
-    Player: All job is done for today! 
+    Alice: All job is done for today! 
 
 <<elseif $day_count == 2 and $is_carpet_cleaned and $is_fireplace_cleaned_day2 and $is_frame_cleaned>>
-    Player: All job is done for today! 
+    Alice: All job is done for today! 
 
 <<elseif $day_count == 3 and $is_desk_cleaned_day3 and $is_floor_right_clean and $is_fireplace_cleaned_day3>>
-    Player: All job is done for today! 
+    Alice: All job is done for today! 
 <<endif>>
 ===

@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
     public Vector2 _movement;
     private Rigidbody2D _rb;
-    [SerializeField] private Animator _animator;
 
     public bool canMove = true;
     private DialogueRunner _dialogueRunner;
@@ -22,15 +21,48 @@ public class PlayerMovement : MonoBehaviour
         canMove = status;
         if (!canMove)
         {
-            _rb.linearVelocity = Vector2.zero;
+            _movement = Vector2.zero; // 입력 벡터 초기화
+            if (_rb != null) _rb.linearVelocity = Vector2.zero;
         }
     }
 
     void Update()
     {
-        //_movement.x = Input.GetAxisRaw("Horizontal");
-        //_movement.y = Input.GetAxisRaw("Vertical");
+        // 1. 대화 진행 여부 감지 및 canMove 자동 복원
+        if (_dialogueRunner != null)
+        {
+            if (_dialogueRunner.IsDialogueRunning)
+            {
+                canMove = false;
+            }
+            else if (!canMove && !_dialogueRunner.IsDialogueRunning)
+            {
+                SetMovement(true);
+            }
+        }
 
+        // 2. 이동 불가능 상태(대화 중)일 때 움직임 벡터 완전 리셋
+        if (!canMove)
+        {
+            _movement = Vector2.zero;
+            if (_rb != null) _rb.linearVelocity = Vector2.zero;
+        }
+        else
+        {
+            // 이동 가능할 때 입력값 받아오기
+            _movement.x = InputManager.Movement.x;
+            _movement.y = InputManager.Movement.y;
+
+            if (_movement.sqrMagnitude < 0.01f)
+            {
+                _movement.x = Input.GetAxisRaw("Horizontal");
+                _movement.y = Input.GetAxisRaw("Vertical");
+            }
+
+            if (_rb != null) _rb.linearVelocity = _movement.normalized * _moveSpeed;
+        }
+
+        // 3. 애니메이터 상태 업데이트 (이동 불가능할 때는 IsWalking이 false가 됨)
         Animator activeAnimator = GetComponentInChildren<Animator>();
 
         if (activeAnimator != null)
@@ -46,50 +78,20 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        //FlipSprite();
-
-        if (_dialogueRunner != null && !_dialogueRunner.IsDialogueRunning && !canMove)
-        {
-            SetMovement(true);
-        }
-
-        if (canMove)
-        {
-            _movement.x = InputManager.Movement.x;
-            _movement.y = InputManager.Movement.y;
-
-            if (_movement.sqrMagnitude < 0.01f)
-            {
-                _movement.x = Input.GetAxisRaw("Horizontal");
-                _movement.y = Input.GetAxisRaw("Vertical");
-            }
-
-            _rb.linearVelocity = _movement.normalized * _moveSpeed;
-        }
-        else
-        {
-            _rb.linearVelocity = Vector2.zero;
-        }
-
-
-
         FlipSprite();
     }
+
     void FlipSprite()
     {
         if (_movement.x > 0)
         {
-            //right animaion
+            // right animation
             transform.localEulerAngles = new Vector3(0, 180, 0);
         }
         else if (_movement.x < 0)
         {
-            //left animation
+            // left animation
             transform.localEulerAngles = new Vector3(0, 0, 0);
-        }
-        else
-        {
-            //play the idle animation
         }
     }
 }

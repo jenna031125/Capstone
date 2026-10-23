@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 740682eb640bf5a41828568acf07d85a
+guid: a9f4b2992ccbac84db136509eff235e2
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: -5929832237704200204
     second: Dust_1
+  - first:
+      213: 3207967757382678166
+    second: Dust_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,12 +109,12 @@ TextureImporter:
       name: Dust_0
       rect:
         serializedVersion: 2
-        x: 316
-        y: 884
-        width: 103
-        height: 42
+        x: 720
+        y: 792
+        width: 314
+        height: 150
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -124,33 +127,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Dust_1
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 872
-        width: 29
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4ff3bf55ff005bda0800000000000000
-      internalID: -5929832237704200204
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a500d6ebd4c358a418deffd66df33adf
     internalID: 0
     vertices: []
     indices: 
@@ -162,6 +143,7 @@ TextureImporter:
     nameFileIdTable:
       Dust_0: 1670660276820739667
       Dust_1: -5929832237704200204
+      Dust_2: 3207967757382678166
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

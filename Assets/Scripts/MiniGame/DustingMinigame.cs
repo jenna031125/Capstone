@@ -21,10 +21,32 @@ public class DustingMinigame : MonoBehaviour, IPointerClickHandler
 
     [Header("World Object")]
     public SpriteRenderer obj;
-    public Sprite completedSprite;
+    [SerializeField] private Sprite _dustyWorldSprite; // 먼지가 쌓인 월드 스프라이트 (미완료)
+    public Sprite completedSprite;                      // 깨끗하게 닦인 월드 스프라이트 (완료)
 
+    private Sprite _originalDustySprite;
     private int _currentClicks = 0;
     private bool _isComplete = false;
+
+    void Awake()
+    {
+        // 1. _dustyWorldSprite가 할당되어 있으면 직접 지정
+        if (_dustyWorldSprite != null)
+        {
+            _originalDustySprite = _dustyWorldSprite;
+        }
+        // 2. 할당이 없으면 시작 시점의 sprite 기억
+        else if (obj != null)
+        {
+            _originalDustySprite = obj.sprite;
+        }
+
+        // 게임 시작 시 미완료(먼지 쌓인) 스프라이트로 강제 세팅
+        if (obj != null && _originalDustySprite != null)
+        {
+            obj.sprite = _originalDustySprite;
+        }
+    }
 
     void OnEnable()
     {
@@ -86,6 +108,7 @@ public class DustingMinigame : MonoBehaviour, IPointerClickHandler
         if (_currentClicks >= _clicksRequired)
         {
             CompleteMinigame();
+            FindFirstObjectByType<OfficeWorldManager>()?.UpdateAllObjectSprites();
         }
     }
 
@@ -102,7 +125,13 @@ public class DustingMinigame : MonoBehaviour, IPointerClickHandler
     private void CompleteMinigame()
     {
         _isComplete = true;
-        obj.sprite = completedSprite;
+
+        // 먼지를 다 털었으므로 깨끗해진 액자 월드 스프라이트로 교체
+        if (obj != null && completedSprite != null)
+        {
+            obj.sprite = completedSprite;
+        }
+
         Cursor.visible = true;
         StartCoroutine(WaitAndCloseRoutine());
     }

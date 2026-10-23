@@ -3,18 +3,18 @@ title: Start
 
 Rain taps softly against the window.
 A cramped studio apartment. Bills scattered across a small table. The room is dim except for the light of a phone screen.
-The Player stares at the screen. 
-<<play_animation Player Black>>
+Alice stares at the screen. 
+//<<play_animation Player Black>>
 
-Player: …Rent… electricity… overdue notice?
+Alice: …Rent… electricity… overdue notice?
 
-The Player exhales.
+Alice exhales.
 
-Player: I can’t keep stretching it like this.
+Alice: I can’t keep stretching it like this.
 
 Her stomach growls. 
 
-Player: …I really need a job. Anything at this point.
+Alice: …I really need a job. Anything at this point.
 
 She goes to job search site and scrolls through job listings.
 
@@ -22,14 +22,14 @@ Part-time Café Staff – Experience required
 Convenience Store Night Shift – Minimum wage
 Warehouse Sorting – Heavy lifting required
 
-Player: Minimum wage… heavy lifting… I won’t survive on that.
+Alice: Minimum wage… heavy lifting… I won’t survive on that.
 
 She scrolls further down.
 The scrolling slows.
 
 Private Residence | High Pay – Paid Immediately After Completion, No Experience Required
 
-Player: ... One week?
+Alice: ... One week?
 
 She taps the listing.
 
@@ -40,35 +40,35 @@ She taps the listing.
 - Generous compensation
 A phone number is listed below. No company name. No address.
 
-Player: ... Private residence?
+Alice: ... Private residence?
 
 She frowns.
 
-Player: No company name… no photos… no reviews…
+Alice: No company name… no photos… no reviews…
 
 She scrolls. Nothing more.
 
-Player: That's suspicious. But...
+Alice: That's suspicious. But...
 
 She breathes in.
 
-Player: The pay. 
+Alice: The pay. 
 
 She rereads the number.
 
-Player: That’s more than I'd make in a month.
+Alice: That’s more than I'd make in a month.
 
 The rain outside grows slightly louder.
 
 What should I do?
 
 -> Ignore it.
-    Player: It’s probably some scam.
-    Player: ... Or even worse. 
+    Alice: It’s probably some scam.
+    Alice: ... Or even worse. 
     A small pause.
-    Player: ... But what if it isn't?
+    Alice: ... But what if it isn't?
     She glances back at the unpaid bills.
-    Player: I just need one week.
+    Alice: I just need one week.
     <<jump PhoneCall>>
 -> Call now.
     <<jump PhoneCall>>
@@ -76,137 +76,100 @@ What should I do?
 ===
 title: PhoneCall
 ---
-<<play_animation Player Grey>>
+//<<play_animation Player Grey>>
 
 The phone rings once. 
 Twice.
 
 Click.
 
-Land Lady: Hello?
+???: Hello?
 
 Her voice is steady. Almost too steady.
 
-Player: Ah, he- hello. I'm calling you about the cleaning job...
+Alice: Ah, he- hello. I'm calling you about the cleaning job...
 
 A brief pause.
 
-Land Lady: A-ha. You saw the listing. 
+???: A-ha. You saw the listing. 
 
-Player: Yes... 
+Alice: Yes... 
 
-Land Lady: Can you start tomorrow morning? 8:00 AM sharp.
+???: Can you come tomorrow right away? 8:00 PM.
 
-Player: Tomorrow morning? Ah, yes! I can do that.
+Alice: Tomorrow evening? Ah, yes! I can do that.
 
-Land Lady: Good. I need someone who follows directions and works without causing any trouble. Do you understand?
+???: Good. I need someone who follows directions and works without causing any trouble. Do you understand?
 
-Player: Y-yes, of course. I won't cause any trouble.
+Alice: Y-yes, of course. I won't cause any trouble.
 
-Land Lady: The address is 104 Blackwood Lane. Don't be late.
+???: The address is 104 Blackwood Lane. Don't be late.
 
 Click.
 
-Player: ...Hello? She hung up.
+Alice: ...Hello? She hung up.
 
-Player: 104 Blackwood Lane... Am I really going to be okay with this job?
+Alice: 104 Blackwood Lane... Am I really going to be okay with this job?
 
-Player: ...I should look around my room and then get some sleep for tomorrow.
+Alice: ...I should look around my room and then get some sleep for tomorrow.
 
 <<set $has_finished_phone_call = true>>
 ===
 
 title: Mansion_Entrance_Arrival
 ---
-Player: So this is the house... 
+Alice: So this is the house... 
 
-Player: It's much bigger and darker than I imagined.
+Alice: It's much bigger and darker than I imagined.
 
-Player: Well, no turning back now... Let's go knock on the door.
+Alice: Well, no turning back now... Let's go knock on the door.
 ===
 
 title: First_Talk
-
 ---
-
-
-
-*press E on the mansion door, cutscene start without asking (controls locked)*
 
 Before you try to knock on the door, the door opens by itself.
 
-
+<<move_butler LivingRoom>>
+<<teleport_with_delay LivingRoom_Transition 2.0>>
 
 Alice: ...! He-Hello.
 
-
-
 Butler: You arrived just on time. Come on in.
 
+Butler: This is our living room.
+Butler: If you follow the red carpet upstairs, the first door you see on the second floor will be where you'll be working.
 
+Alice: Ah... yes!
+Alice: 'Wow, getting straight to business as soon as I arrive...'
 
-*Both move into the mansion*
-<<teleport_with_delay LivingRoom_Transition 2.0>>
+<<teleport_with_delay Bedroom_Transition 1.0>>
+<<move_butler Bedroom>>
 
-
-Butler: This is our living room. You will be working upstairs.
-
-Butler: The first room you see when you get up there.
-
-
-
-*camera moves up to the 2nd floor hallway, and comes back*
-
-
-
-Butler: This is your room here. Rest today, and your work will start from tomorrow.
-
+Butler: This is your room. Rest today, and your work will start tomorrow.
 Butler: And wear these while you stay here.
-
-
 
 *butler turns around to alice, hands the uniform*
 
+Butler: ... You are free to do as you like, but there is one thing I must ask you not to do.
+Butler: Do not pry around trying to find out too much.
 
-
-Butler: ... You can do anything you like, but just one rule you must follow.
-
-Butler: Stay inside your room late at night. Do not wander around after hours.
-
-
-
-Butler: As for today, you are free to rest and look around the mansion. Just make sure not to cause any trouble.
-
+Butler: As for today, feel free to rest and look around the mansion. Just make sure not to cause any trouble.
 Butler: I will see you tomorrow morning.
 
 Alice: Ah, thank...
 
-
-
-*The Butler leaves*
-
-
+// 3. 화면 페이드아웃되는 동안 집사를 복도로 이동시킴
+<<fade_screen_sleep>>
+<<move_butler Hallway>>
 
 Alice: ... She just left. 
 
-
-
-*Alice steps inside her assigned room*
-<<teleport_with_delay Bedroom_Transition 1.0>>
-
-
-
-Alice: Wow... it's really old and small.
-
+Alice: Wow... the room's really old and small.
 Alice: Well, at least it has a bed...
-
 Alice: Before I look around the mansion, I should change into the maid uniform first.
 
-
-
 <<change_clothes Maid>>
-
-
 
 Alice: Alright, everything fits. Time to explore.
 
@@ -240,7 +203,7 @@ Butler: You may leave as soon as you pack up.
 -> Alice: I think I'm ready to leave.
     Butler: Great. I'll walk you to the door. 
 
-<<teleport_with_delay Exit_Transition 2.5>>
+<<teleport_with_delay Exit_Transition 1.5>>
 
 Alice: ...
 Alice: That felt like a dream...
@@ -248,7 +211,26 @@ Alice: ...
 Alice: ......
 Alice: Let's go home. 
 
+<<jump Normal_Ending_Monologue>>
 ===
+
+title: Normal_Ending_Monologue
+---
+<<fade_screen_sleep>>
+
+(The three days spent at the mansion felt like a strange, fleeting dream.)
+
+(Returning to my cramped studio apartment, I checked my account—the promised payment was already there, exactly down to the last cent.)
+
+(I paid off the overdue bills, the rent, and the utilities that had been weighing on my shoulders for months.)
+
+(Life went right back to normal, as if nothing had ever happened...)
+
+(As if that eerie, quiet mansion was nothing more than a illusion.)
+
+<<jump Normal_Ending_Credit>>
+===
+
 title: Normal_Ending_Credit
 ---
 

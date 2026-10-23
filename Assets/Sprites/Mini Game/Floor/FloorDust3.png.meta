@@ -115,10 +115,10 @@ TextureImporter:
       name: FloorDust3_0
       rect:
         serializedVersion: 2
-        x: 1419
-        y: 191
-        width: 693
-        height: 378
+        x: 1422
+        y: 127
+        width: 744
+        height: 403
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

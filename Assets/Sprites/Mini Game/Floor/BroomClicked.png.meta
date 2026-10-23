@@ -103,12 +103,12 @@ TextureImporter:
       name: BroomClicked_0
       rect:
         serializedVersion: 2
-        x: 640
-        y: 267
-        width: 156
-        height: 885
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 596
+        y: 96
+        width: 249
+        height: 1228
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 613f6ee2ed228214693087144e0eb3d4
     internalID: 0
     vertices: []
     indices: 

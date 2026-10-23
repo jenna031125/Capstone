@@ -6,8 +6,8 @@ using Yarn.Unity;
 public class FloorCleaningMinigame : MonoBehaviour
 {
     [Header("UI References")]
-[SerializeField] private Image _broomCursorImage;
-[SerializeField] private FloorDustSpot[] _dustPiles;
+    [SerializeField] private Image _broomCursorImage;
+    [SerializeField] private FloorDustSpot[] _dustPiles;
 
     [Header("Sprites")]
     [SerializeField] private Sprite _broomIdleSprite;
@@ -19,9 +19,31 @@ public class FloorCleaningMinigame : MonoBehaviour
 
     [Header("World Object")]
     public SpriteRenderer obj;
-    public Sprite completedSprite;
+    [SerializeField] private Sprite _dirtyWorldSprite; // 먼지/쓰레기가 쌓인 상태의 월드 스프라이트 (미완료)
+    public Sprite completedSprite;                     // 깨끗이 쓸어낸 상태의 월드 스프라이트 (완료)
 
+    private Sprite _originalDirtySprite;
     private bool _isComplete = false;
+
+    void Awake()
+    {
+        // 1. _dirtyWorldSprite가 직접 지정되어 있으면 사용
+        if (_dirtyWorldSprite != null)
+        {
+            _originalDirtySprite = _dirtyWorldSprite;
+        }
+        // 2. 할당이 없다면 시작 시점의 sprite를 기록
+        else if (obj != null)
+        {
+            _originalDirtySprite = obj.sprite;
+        }
+
+        // 게임 시작 시 미완료(더러운) 스프라이트로 강제 세팅
+        if (obj != null && _originalDirtySprite != null)
+        {
+            obj.sprite = _originalDirtySprite;
+        }
+    }
 
     void OnEnable()
     {
@@ -78,11 +100,19 @@ public class FloorCleaningMinigame : MonoBehaviour
         }
 
         CompleteMinigame();
+        FindFirstObjectByType<OfficeWorldManager>()?.UpdateAllObjectSprites();
     }
 
     private void CompleteMinigame()
     {
         _isComplete = true;
+
+        // 청소가 완료되면 월드 스프라이트를 깨끗한 스프라이트로 변경
+        if (obj != null && completedSprite != null)
+        {
+            obj.sprite = completedSprite;
+        }
+
         Cursor.visible = true;
         StartCoroutine(WaitAndCloseRoutine());
     }

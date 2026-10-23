@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f88d3ecb33fd8464d9089fdaf18ff67c
+guid: da3896c226ab04842ad7ca320486c573
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -103,10 +103,10 @@ TextureImporter:
       name: Stairs_0
       rect:
         serializedVersion: 2
-        x: 762
-        y: 403
+        x: 855
+        y: 290
         width: 729
-        height: 958
+        height: 1483
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

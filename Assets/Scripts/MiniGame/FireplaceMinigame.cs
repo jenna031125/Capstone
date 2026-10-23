@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Yarn.Unity;
@@ -17,47 +18,49 @@ public class FireplaceMinigame : MonoBehaviour
 
     [Header("World Object")]
     public SpriteRenderer obj;
-    public Sprite completedSprite;
+    [SerializeField] private Sprite _coldWorldSprite; // 불이 꺼진 차가운 상태의 월드 스프라이트 (미완료)
+    public Sprite completedSprite;                    // 불이 켜진 상태의 월드 스프라이트 (완료)
 
-    private Sprite _originalColdSprite; // Remembers cold fireplace sprite
+    private Sprite _originalColdSprite;
     private int _woodPlacedCount = 0;
     private bool _isLit = false;
 
+    // 배치된 장작들을 추적하기 위한 리스트
+    private List<DraggableWood> _placedWoodList = new List<DraggableWood>();
+
     void Awake()
     {
-        if (obj != null)
+        // 1. _coldWorldSprite가 직접 할당되어 있다면 명시적으로 사용
+        if (_coldWorldSprite != null)
+        {
+            _originalColdSprite = _coldWorldSprite;
+        }
+        // 2. 할당이 없다면 시작 시점의 sprite를 기록
+        else if (obj != null)
         {
             _originalColdSprite = obj.sprite;
+        }
+
+        // 게임 시작 시 미완료(차가운) 스프라이트로 강제 세팅
+        if (obj != null && _originalColdSprite != null)
+        {
+            obj.sprite = _originalColdSprite;
         }
     }
 
     void OnEnable()
     {
-        _woodPlacedCount = 0;
-        _isLit = false;
-
-        if (_fireplaceImage != null && _emptyFireplaceSprite != null)
-        {
-            _fireplaceImage.sprite = _emptyFireplaceSprite;
-        }
-
-        if (_lightFireButton != null)
-        {
-            _lightFireButton.gameObject.SetActive(false);
-            _lightFireButton.interactable = true;
-            _lightFireButton.onClick.RemoveAllListeners();
-            _lightFireButton.onClick.AddListener(OnFireplaceClicked);
-        }
-
-        foreach (var wood in _woodObjects)
-        {
-            if (wood != null) wood.SetActive(true);
-        }
+        ResetMinigameState();
     }
 
-    public void OnWoodPlaced()
+    public void OnWoodPlaced(DraggableWood wood)
     {
         _woodPlacedCount++;
+
+        if (!_placedWoodList.Contains(wood))
+        {
+            _placedWoodList.Add(wood);
+        }
 
         if (_woodPlacedCount >= 3)
         {
@@ -74,9 +77,19 @@ public class FireplaceMinigame : MonoBehaviour
 
         _isLit = true;
 
+        // 1. 불이 켜진 UI 스프라이트로 변경
         if (_fireplaceImage != null && _litFireplaceSprite != null)
         {
             _fireplaceImage.sprite = _litFireplaceSprite;
+        }
+
+        // 2. 불을 붙였으므로 드롭된 장작 Sprite들 모두 숨기기
+        foreach (var wood in _placedWoodList)
+        {
+            if (wood != null)
+            {
+                wood.gameObject.SetActive(false);
+            }
         }
 
         if (_lightFireButton != null)
@@ -91,6 +104,9 @@ public class FireplaceMinigame : MonoBehaviour
     {
         yield return new WaitForSeconds(_delayBeforeClose);
         CloseMinigame();
+        FindFirstObjectByType<OfficeWorldManager>()?.UpdateAllObjectSprites();
+
+        // 불이 다 켜지면 월드 스프라이트도 따뜻하게 타오르는 완료 스프라이트로 교체
         if (obj != null && completedSprite != null)
         {
             obj.sprite = completedSprite;
@@ -127,21 +143,27 @@ public class FireplaceMinigame : MonoBehaviour
     {
         _woodPlacedCount = 0;
         _isLit = false;
+        _placedWoodList.Clear();
 
-        // 1. Revert world object back to cold/unlit sprite
+        if (_fireplaceImage != null && _emptyFireplaceSprite != null)
+        {
+            _fireplaceImage.sprite = _emptyFireplaceSprite;
+        }
+
+        // 월드 오브젝트 원위치(차가운 벽난로)로 복원
         if (obj != null && _originalColdSprite != null)
         {
             obj.sprite = _originalColdSprite;
         }
 
-        // 2. Reset UI button
         if (_lightFireButton != null)
         {
             _lightFireButton.gameObject.SetActive(false);
             _lightFireButton.interactable = true;
+            _lightFireButton.onClick.RemoveAllListeners();
+            _lightFireButton.onClick.AddListener(OnFireplaceClicked);
         }
 
-        // 3. Reset draggable wood items
         DraggableWood[] woods = GetComponentsInChildren<DraggableWood>(true);
         foreach (DraggableWood wood in woods)
         {

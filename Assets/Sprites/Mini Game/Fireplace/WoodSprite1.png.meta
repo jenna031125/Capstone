@@ -103,12 +103,12 @@ TextureImporter:
       name: WoodSprite1_0
       rect:
         serializedVersion: 2
-        x: 1999
-        y: 180
-        width: 161
-        height: 320
+        x: 1910
+        y: 95
+        width: 227
+        height: 276
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 861fea3202711a4489e060c1b058638a
     internalID: 0
     vertices: []
     indices: 

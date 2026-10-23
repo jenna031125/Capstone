@@ -103,12 +103,12 @@ TextureImporter:
       name: OfficePaper_0
       rect:
         serializedVersion: 2
-        x: 362
-        y: 305
-        width: 362
-        height: 441
+        x: 358
+        y: 727
+        width: 403
+        height: 459
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e60d143af30064648a44199bb3560f20
     internalID: 0
     vertices: []
     indices: 

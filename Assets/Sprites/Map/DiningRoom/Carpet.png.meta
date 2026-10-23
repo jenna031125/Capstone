@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fcf958efed3b0034c9dceb0cb41a7b5c
+guid: 7b56c1c55f7390b40a25b4ce4475bfc7
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -103,10 +103,10 @@ TextureImporter:
       name: Carpet_0
       rect:
         serializedVersion: 2
-        x: 758
-        y: 341
-        width: 692
-        height: 818
+        x: 1180
+        y: 291
+        width: 731
+        height: 927
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

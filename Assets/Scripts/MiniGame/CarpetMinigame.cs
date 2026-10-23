@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Yarn.Unity;
-using CsvHelper.Configuration.Attributes;
 
 public class CarpetMinigame : MonoBehaviour, IPointerClickHandler
 {
@@ -26,7 +25,30 @@ public class CarpetMinigame : MonoBehaviour, IPointerClickHandler
 
     [Header("World Object")]
     public SpriteRenderer obj;
-    public Sprite completedSprite;
+    [SerializeField] private Sprite _dirtyWorldSprite; // 카펫 들추기 전/청소 전 월드 스프라이트 (미완료)
+    public Sprite completedSprite;                     // 청소 완료 후 월드 스프라이트 (완료)
+
+    private Sprite _originalDirtySprite;
+
+    void Awake()
+    {
+        // 1. _dirtyWorldSprite가 할당되어 있다면 지정된 스프라이트 사용
+        if (_dirtyWorldSprite != null)
+        {
+            _originalDirtySprite = _dirtyWorldSprite;
+        }
+        // 2. 할당되어 있지 않다면 시작 시점의 sprite를 기재
+        else if (obj != null)
+        {
+            _originalDirtySprite = obj.sprite;
+        }
+
+        // 게임 시작 시 미완료(청소 전) 스프라이트로 강제 세팅
+        if (obj != null && _originalDirtySprite != null)
+        {
+            obj.sprite = _originalDirtySprite;
+        }
+    }
 
     void OnEnable()
     {
@@ -77,7 +99,6 @@ public class CarpetMinigame : MonoBehaviour, IPointerClickHandler
             }
             return;
         }
-    
 
         // Phase 3: Unflip carpet after mess is completely cleaned
         if (_isFlipped && _allMessCleared)
@@ -89,6 +110,7 @@ public class CarpetMinigame : MonoBehaviour, IPointerClickHandler
             }
 
             CompleteMinigame();
+            FindFirstObjectByType<OfficeWorldManager>()?.UpdateAllObjectSprites();
         }
     }
 
@@ -110,7 +132,13 @@ public class CarpetMinigame : MonoBehaviour, IPointerClickHandler
     private void CompleteMinigame()
     {
         _isComplete = true;
-        obj.sprite = completedSprite;
+
+        // 카펫 청소가 완료되었으므로 월드 오브젝트도 깔끔한 스프라이트로 교체
+        if (obj != null && completedSprite != null)
+        {
+            obj.sprite = completedSprite;
+        }
+
         StartCoroutine(WaitAndCloseRoutine());
     }
 

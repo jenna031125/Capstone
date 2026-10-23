@@ -11,18 +11,30 @@ public class DeskTidyingMinigame : MonoBehaviour
 
     [Header("World Object")]
     public SpriteRenderer obj;
-    public Sprite completedSprite;
+    [SerializeField] private Sprite _messyWorldSprite; // 어지러운 상태의 월드 스프라이트 (미완료)
+    public Sprite completedSprite;                      // 정돈된 상태의 월드 스프라이트 (완료)
 
-    private Sprite _originalMessySprite; // Automatically remembers the messy sprite at start
+    private Sprite _originalMessySprite;
     private int _stackedCount = 0;
     public int StackedCount => _stackedCount;
 
     void Awake()
     {
-        // Remember whatever sprite the desk started with (the messy one)
-        if (obj != null)
+        // 1. _messyWorldSprite가 직접 할당되어 있다면 이를 명시적으로 사용
+        if (_messyWorldSprite != null)
+        {
+            _originalMessySprite = _messyWorldSprite;
+        }
+        // 2. 할당이 없다면 기존처럼 시작 시점의 sprite를 기재
+        else if (obj != null)
         {
             _originalMessySprite = obj.sprite;
+        }
+
+        // 게임 시작 시 미완료(어지러운) 스프라이트로 강제 세팅
+        if (obj != null && _originalMessySprite != null)
+        {
+            obj.sprite = _originalMessySprite;
         }
     }
 
@@ -47,10 +59,15 @@ public class DeskTidyingMinigame : MonoBehaviour
         Debug.Log("Desk is completely tidied!");
         yield return new WaitForSeconds(_delayBeforeClose);
         CloseMinigame();
+
+        // 1. 미니게임 완료 시 정돈된 스프라이트로 교체
         if (obj != null && completedSprite != null)
         {
             obj.sprite = completedSprite;
         }
+
+        // 2. OfficeWorldManager에 청소 상태 즉시 반영
+        FindFirstObjectByType<OfficeWorldManager>()?.UpdateAllObjectSprites();
     }
 
     public void CloseMinigame()
